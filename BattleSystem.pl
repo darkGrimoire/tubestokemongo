@@ -1,6 +1,3 @@
-
-:- dynamic(musuh/5).
-:- dynamic(inventory/2).
 /* Pre-Battle */
 pickTokemon() %cek inventory
 
