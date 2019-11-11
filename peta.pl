@@ -44,7 +44,7 @@ init_map :-
  printprio(X,Y):-
     isBorderKiri(X,Y),!, write('X').
  printprio(X,Y):-
-    isBorderAtas(X,Y),!, writre('X).
+    isBorderAtas(X,Y),!, write('X').
  printprio(X,Y):-
     isBorderBawah(X,Y),!, write('X').
  printprio(X,Y):-
