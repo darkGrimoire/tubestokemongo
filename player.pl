@@ -1,3 +1,7 @@
+:- include('peta.pl').
+:- dynamic(pos/2).
+:- dynamic(maxTokemon/1).
+:- dynamic(tokemon/6).
 
 %contoh data
 
@@ -7,22 +11,25 @@
 
 %inisialisasi fakta player, masukin ke init_player
 
-maxTokemon(6).
+init_player :-
+    asserta(tokemon(catamon,normal,water,1000,15,45)),
+    asserta(pos(5,6)), %bisa dirandom juga mungkin ini posisi awalnya (?)
+	asserta(maxTokemon(6)).
 
 
 %cari banyak tokemon yang lagi dipunya
 
-cekBanyakTokemon(banyak) :-
+cekBanyakTokemon(Banyak) :-
 	findall(B, tokemon(B,_,_,_,_,_), ListTokemon),
-	length(ListTokemon, banyak),
+	length(ListTokemon, Banyak).
 
 
 %Nambahin tokemon, cek dulu banyak tokemon di database
 
 addTokemon(_,_,_,_,_,_) :-
-	cekBanyakTokemon(banyak),
+	cekBanyakTokemon(Banyak),
 	maxTokemon(Maks),
-	(banyak+1) > Maks , !, fail.
+	(Banyak+1) > Maks , !, fail.
 
 addTokemon(Tokemon, Type, Elemental, HP, Atk, SpAtk) :-
 	asserta(tokemon(Tokemon, Type, Elemental, HP, Atk, SpAtk)).
@@ -32,7 +39,7 @@ addTokemon(Tokemon, Type, Elemental, HP, Atk, SpAtk) :-
 
 %gabisa jalan ke atas
 w :-
-	pos(X,Y),
+	pos(_,Y),
 	tinggipeta(Z),
 	Y =:= Z, 
 	write('Jalan anda menuju utara terhalang tembok besar!!'), nl, !.
@@ -46,7 +53,7 @@ w :-
 	asserta(pos(X,YNew)),!.
 
 s :-
-	pos(X,Y),
+	pos(_,Y),
 	Y =:= 1, 
 	write('Jalan anda menuju selatan terhalang tembok besar!!'), nl, !.
 
@@ -57,8 +64,7 @@ s :-
 	asserta(pos(X,YNew)),!.
 
 a :-
-	pos(X,Y),
-	lebarpeta(Z),
+	pos(X,_),
 	X =:= 1, 
 	write('Jalan anda menuju barat terhalang tembok besar!!'), nl, !.
 
@@ -69,7 +75,7 @@ a :-
 	asserta(pos(XNew,Y)),!.
 
 d :-
-	pos(X,Y),
+	pos(X,_),
 	lebarpeta(Z),
 	X =:= Z, 
 	write('Jalan anda menuju timur terhalang tembok besar!!'), nl, !.
@@ -80,3 +86,40 @@ d :-
 	X < Z,
 	XNew is X+1,
 	asserta(pos(XNew,Y)),!.
+
+
+
+%cek status
+
+status :-
+	\+gameStarted(_),
+	write('You cannot do this, start the game first!!'), nl, !.
+
+status :-
+	pos(X,Y),
+	write('You are currently in coordinate '), write(X), write(','), write(Y), nl,
+
+	cekBanyakTokemon(Banyak),
+	write('You have acquired '), write(Banyak), write(' tokemons!!'), nl, N is 1,
+	forall(tokemon(Tokemon, Type, Elemental, HP, Atk, SpAtk), (
+
+		write(N), write(' --> '), write('Name: '), write(Tokemon), nl,
+		write('      Type: '), write(Type), nl,
+		write('      Elemental: '), write(Elemental), nl,
+		write('      Current HP: '), write(HP), nl,
+		write('      Attack: '), write(Atk), nl,
+		write('      Special Attack: '), write(SpAtk), nl
+
+		)),
+	write('Here are the legendary tokemons you still have to seek...'), nl, N is 1,
+	forall(tokemon(Tokemon, legendary, Elemental, HP, Atk, SpAtk), (
+
+		write(N), write(' --> '), write('Name: '), write(Tokemon), nl,
+		% write('      Type: '), write(Type), nl,
+		write('      Elemental: '), write(Elemental), nl,
+		write('      Current HP: '), write(HP), nl,
+		write('      Attack: '), write(Atk), nl,
+		write('      Special Attack: '), write(SpAtk), nl
+
+
+		)).

@@ -51,9 +51,9 @@ map :-
     tinggipeta(T),
     lebarpeta(L),
     XMin is 0,
-    XMax is L+1,
+    XMax is T+1,
     YMin is 0,
-    YMax is T+1,
+    YMax is L+1,
     forall(between(YMin,YMax,J), (
         forall(between(XMin,XMax,I), (
             printMap(I,J)
