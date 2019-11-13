@@ -5,4 +5,4 @@ Tubes ehe, list jobdesk:
 13518089 - Annisa Rahim: ADT Tokemon  
 13518125 - Faris Rizki Ekananda: ADT Battle  
 # SEMANGAT GAES
-[REFERENSI](github.com/hafidhrendyanto/Tubes-Logif)
+[REFERENSI](http://github.com/hafidhrendyanto/Tubes-Logif)
