@@ -29,7 +29,7 @@ musuhnyaApa :-
     random(0,PanjangList,X),
     ambil(ListMusuh,X,Tokemon),
     isTokemon(Tokemon,Jenis,Tipe,HP,Attack,Sp_attack),
-    asserta(musuh(0,Tokemon,Jenis,Tipe,HP,Attack,Sp_attack))
+    asserta(musuh(0,Tokemon,Jenis,Tipe,HP,Attack,Sp_attack)).
 /*
 peluangRun(P) :- 
 */

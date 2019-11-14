@@ -12,9 +12,9 @@
 :- include('utils.pl').
 /*-----------------------------------------*/
 
-/*start :-
+start :-
     gameStarted(_),
-    write('The game has started'),nl,!.*/
+    write('The game has started'),nl,!.
 
 start :-
     write('+------------------+'),nl,
@@ -42,11 +42,11 @@ help :-
     write('d.       : gerak 1 petak ke timur'),nl,
     write('a.       : gerak 1 petak ke barat'),nl,!.
 
-/*map :-
-    \+gameMain(_),
+map :-
+    \+gameStarted(_),
     write('Game belum mulai!'),nl,
     write('Gunakan command [start.] untuk memulai permainannya!'),nl,!.
-*/
+
 map :-
     tinggipeta(T),
     lebarpeta(L),

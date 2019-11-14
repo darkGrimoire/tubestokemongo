@@ -2,6 +2,8 @@
 :- dynamic(pos/2).
 :- dynamic(maxTokemon/1).
 :- dynamic(tokemon/6).
+:- dynamic(inventory/6).
+:- dynamic(gameStarted/1).
 
 %contoh data
 
@@ -12,7 +14,7 @@
 %inisialisasi fakta player, masukin ke init_player
 
 init_player :-
-    asserta(tokemon(catamon,normal,water,1000,15,45)),
+    asserta(inventory(catamon,normal,water,1000,15,45)),
     asserta(pos(5,6)), %bisa dirandom juga mungkin ini posisi awalnya (?)
 	asserta(maxTokemon(6)).
 
@@ -32,7 +34,7 @@ addTokemon(_,_,_,_,_,_) :-
 	(Banyak+1) > Maks , !, fail.
 
 addTokemon(Tokemon, Type, Elemental, HP, Atk, SpAtk) :-
-	asserta(tokemon(Tokemon, Type, Elemental, HP, Atk, SpAtk)).
+	asserta(inventory(Tokemon, Type, Elemental, HP, Atk, SpAtk)).
 
 
 %jalan
