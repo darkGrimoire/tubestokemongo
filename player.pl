@@ -4,6 +4,7 @@
 :- dynamic(inventory/12).
 :- dynamic(gameStarted/1).
 :- dynamic(alreadyHeal/1).
+:- dynamic(probbattleFlag/1).
 
 
 
@@ -77,7 +78,6 @@ heal :-
 	pos(X,Y), isGym(A,B), X =:= A, Y =:= B, alreadyHeal(_),
 	write('You already heal the tokemons, cannot do it again :('), nl,!.
 
-
 heal :-
 	pos(X,Y), isGym(A,B), X =:= A, Y =:= B, \+alreadyHeal(_),
 	forall(inventory(Tokemon, Type, Elemental, _, MaxHP, NamaAtk, Atk, NamaSpAtk, SpAtk, Lvl, CurExp, NeededExp), (
@@ -93,37 +93,55 @@ heal :-
 
 
 %jalan
+
+s :-
+	inbattleFlag(_), write('You can\'t move during battle'),nl,!.
+
+s :-
+	pbattleFlag(_), write('You can\'t move during battle'),nl,!.
+
+s :-
+	probbattleFlag(_), write('You can\'t move'),nl,!.
+
 s:-
 	pos(X,Y),
 	YNew is Y+1,
-	isObstacle(X,YNew),
+	isObstacle(X,YNew),map,
 	write('Perjalan Anda terhalang oleh tembok besar!'),nl,
 	write('Anda harus putar balik dan cari jalan yang lebih aman!'),nl,!.
 s :-
 	pos(_,Y),
 	tinggipeta(Z),
-	Y =:= Z, 
+	Y =:= Z, map,
 	write('Wahhh Anda sudah berkeliling sampai ke penjuru selatan dunia!!'), nl,
 	write('Anda perlu berbalik dan mencari Tokemon di penjuru dunia lain!!'),!.
-
 s :-
 	retract(pos(X,Y)),
 	tinggipeta(Z),
 	Y < Z,
 	YNew is Y+1,
-	asserta(pos(X,YNew)),
-	cekGym,!.
+	asserta(pos(X,YNew)), map,
+	isGym(X,YNew) -> (cekGym);(cekMusuh) ,!.
+
+w :-
+	inbattleFlag(_), write('You can\'t move during battle'),nl,!.
+
+w :-
+	pbattleFlag(_), write('You can\'t move during battle'),nl,!.
+
+w :-
+	probbattleFlag(_), write('You can\'t move'),nl,!.
 
 w:-
 	pos(X,Y),
 	YNew is Y - 1,
-	isObstacle(X,YNew),
+	isObstacle(X,YNew), map,
 	write('Perjalan Anda terhalang oleh tembok besar!'),nl,
 	write('Anda harus putar balik dan cari jalan yang lebih aman!'),nl,!.
 
 w :-
 	pos(_,Y),
-	Y =:= 1, 
+	Y =:= 1,map, 
 	write('Wahhh Anda sudah berkeliling sampai ke penjuru utara dunia!!'), nl,
 	write('Anda perlu berbalik dan mencari Tokemon di penjuru dunia lain!!'),!.
 
@@ -131,19 +149,28 @@ w :-
 	retract(pos(X,Y)),
 	Y > 1,
 	YNew is Y-1,
-	asserta(pos(X,YNew)),
-	cekGym,!.
+	asserta(pos(X,YNew)), map,
+	isGym(X,YNew) -> (cekGym);(cekMusuh) ,!.
+
+a :-
+	inbattleFlag(_), write('You can\'t move during battle'),nl, !.
+
+a :-
+	pbattleFlag(_), write('You can\'t move during battle'),nl,!.
+
+a :-
+	probbattleFlag(_), write('You can\'t move'),nl,!.
 
 a:-
 	pos(X,Y),
 	XNew is X-1,
-	isObstacle(XNew,Y),
+	isObstacle(XNew,Y),map,
 	write('Perjalan Anda terhalang oleh tembok besar!'),nl,
 	write('Anda harus putar balik dan cari jalan yang lebih aman!'),nl,!.
 
 a :-
 	pos(X,_),
-	X =:= 1, 
+	X =:= 1,map, 
 	write('Wahhh Anda sudah berkeliling sampai ke ujung barat dunia!!'), nl,
 	write('Anda perlu berbalik dan mencari Tokemon di penjuru dunia lain!!'),!.
 
@@ -151,19 +178,29 @@ a :-
 	retract(pos(X,Y)),
 	X > 1,
 	XNew is X-1,
-	asserta(pos(XNew,Y)),cekGym,!.
+	asserta(pos(XNew,Y)), map,
+	isGym(XNew,Y) -> (cekGym);(cekMusuh) ,!.
+
+d :-
+	inbattleFlag(_), write('You can\'t move during battle'),nl,!.
+
+d :-
+	pbattleFlag(_), write('You can\'t move during battle'),nl,!.
+
+d :-
+	probbattleFlag(_), write('You can\'t move'),nl,!.
 
 d:-
 	pos(X,Y),
 	XNew is X+1,
-	isObstacle(XNew,Y),
+	isObstacle(XNew,Y),map,
 	write('Perjalan Anda terhalang oleh tembok besar!'),nl,
 	write('Anda harus putar balik dan cari jalan yang lebih aman!'),nl,!.
 
 d :-
 	pos(X,_),
 	lebarpeta(Z),
-	X =:= Z, 	
+	X =:= Z,map, 	
 	write('Wahhh Anda sudah berkeliling sampai ke ujung timur dunia!!'), nl,
 	write('Anda perlu berbalik dan mencari Tokemon di penjuru dunia lain!!'),!.
 
@@ -172,31 +209,52 @@ d :-
 	lebarpeta(Z),
 	X < Z,
 	XNew is X+1,
-	asserta(pos(XNew,Y)),cekGym,!.
+	asserta(pos(XNew,Y)), map,
+	isGym(XNew,Y) -> (cekGym);(cekMusuh) ,!.
 
 cekGym:-
-	pos(X,Y),
-	isGym(X,Y),
 	write('Wah Anda telah sampai di Gym'),nl,
 	write('Bugarkan kembali para Tokemon Anda, dengan command: heal. '),!.
 
-/*
 cekMusuh :-
-	/*
 	generateEncounter(Hasil),
-	Hasil == ada/gaada
-	ada -->
-		write('run/fight'),
-		run -->
-			generatePeluangRun(Hasil2),
-			Hasil2 == berhasil/gagal,
-			berhasil --> balik ke sebelumnya
-			write(gagal),
-			fight
-		fight --> generateMusuh,!.
-	gaada --> balik,!.
-	*/
-*/
+	Hasil = ada -> (asserta(probbattleFlag(1)), write('A wild tokemon appears... fight or run?'), nl);
+	(write('Tidak ada tokemon, lanjutkan perjalanan...'),nl,! ),!.
+
+run :-
+	inbattleFlag(_), 
+	write('Kamu tidak bisa kabur saat battle, tetap semangat hari masih panjang!'), nl,
+	!.
+
+run :-
+	pbattleFlag(_),
+	write('You are otw battle, can\'t run'), nl,
+	!.
+
+run :- 
+	generatePeluangRun(Hasil2),
+		Hasil2 = berhasil(
+			write('You successfully escape the tokemon, continue the journey!'), nl, !
+		);(
+			write('You fail to escape the tokemon... Prepare for the battle!!'), nl,
+			generateMusuh, !
+		).
+
+fight :-
+	inbattleFlag(_),
+	write('You are currently on a battle'), nl,
+	!.
+
+fight :-
+	pbattleFlag(_),
+	write('You are otw battle, sabar'), nl,
+	!.
+
+fight :-
+	write('You choose to fight, may the force be with you!'), nl,
+	generateMusuh, !.
+
+
 
 %cek status
 
@@ -209,38 +267,30 @@ status :-
 	write('You are currently in coordinate '), write(X), write(','), write(Y), nl,
 
 	cekBanyakTokemon(Banyak), cekBanyakLegendaryTokemon(BanyakLegendary),
-	write('You have acquired '), write(Banyak), write(' tokemons!!'), nl, N is 1,
+	write('You have acquired '), write(Banyak), write(' tokemons!!'), nl,
 	write('...dengan '), write(BanyakLegendary), write(' di antaranya adalah legendary! WOW!'), nl,
 	forall(inventory(Tokemon, Type, Elemental, HP, MaxHP, NamaAtk, Atk, NamaSpAtk, SpAtk, Lvl, CurExp, NeededExp), (
 
 		write('  --> '), write('Name: '), write(Tokemon), nl,
 		write('      Type: '), write(Type), nl,
 		write('      Elemental: '), write(Elemental), nl,
-		write('      Health: '), write(HP), nl,
-		write('      Max Health: '), write(MaxHP), nl,
-		write('      Nama Skill Attack: '), write(NamaAtk), nl,
-		write('      Attack: '), write(Atk), nl,
-		write('      Nama Skill Special Attack: '), write(NamaSpAtk), nl,
-		write('      Special Attack: '), write(SpAtk), nl,
-		write('      Level Tokemon: '), write(Lvl), nl,
-		write('      Current XP: '), write(CurExp), nl,
+		write('      Health: '), write(HP), write('/'), write(MaxHP), nl,
+		write('      Skill Attack [Damage]: '), write(NamaAtk), write(' ['), write(Atk), write(']'), nl,
+		write('      Skill Special Attack [Damage]: '), write(NamaSpAtk), write(' ['), write(SpAtk), write(']'), nl,
+		write('      Level: '), write(Lvl), nl,
+		write('      XP: '), write(CurExp), nl,
 		write('      XP yang dibutuhkan buat naik level: '), write(NeededExp), nl
 
 		)),
 
 	write('Here are the legendary tokemons you still have to seek...'), nl,
-	forall(musuh(Idx,Tokemon, legendary, Elemental, HP, MaxHP, NamaAtk, Atk, NamaSpAtk, SpAtk, Lvl, CurExp, NeededExp), (
+	forall(musuh(_,Tokemon, legendary, Elemental, HP, MaxHP, NamaAtk, Atk, NamaSpAtk, SpAtk, Lvl, CurExp, NeededExp), (
 
 		write('  --> '), write('Name: '), write(Tokemon), nl,
 		write('      Elemental: '), write(Elemental), nl,
-		write('      Health: '), write(HP), nl,
-		write('      Max Health: '), write(MaxHP), nl,
-		write('      Nama Skill Attack: '), write(NamaAtk), nl,
-		write('      Attack: '), write(Atk), nl,
-		write('      Nama Skill Special Attack: '), write(NamaSpAtk), nl,
-		write('      Special Attack: '), write(SpAtk), nl,
-		write('      Level Tokemon: '), write(Lvl), nl,
-		write('      Current XP: '), write(CurExp), nl,
-		write('      XP yang dibutuhkan buat naik level: '), write(NeededExp), nl
+		write('      Skill Attack [Damage]: '), write(NamaAtk), write(' ['), write(Atk), write(']'), nl,
+		write('      Skill Special Attack [Damage]: '), write(NamaSpAtk), write(' ['), write(SpAtk), write(']'), nl,
+		write('      Level: '), write(Lvl), nl
 
 		)).
+
