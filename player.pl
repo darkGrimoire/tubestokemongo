@@ -4,6 +4,7 @@
 :- dynamic(inventory/12).
 :- dynamic(gameStarted/1).
 :- dynamic(alreadyHeal/1).
+:- dynamic(probbattleFlag/1).
 
 
 
@@ -99,6 +100,9 @@ s :-
 s :-
 	pbattleFlag(_), write('You can\'t move during battle'),nl,!.
 
+s :-
+	probbattleFlag(_), write('You can\'t move'),nl,!.
+
 s:-
 	pos(X,Y),
 	YNew is Y+1,
@@ -124,6 +128,9 @@ w :-
 
 w :-
 	pbattleFlag(_), write('You can\'t move during battle'),nl,!.
+
+w :-
+	probbattleFlag(_), write('You can\'t move'),nl,!.
 
 w:-
 	pos(X,Y),
@@ -151,6 +158,9 @@ a :-
 a :-
 	pbattleFlag(_), write('You can\'t move during battle'),nl,!.
 
+a :-
+	probbattleFlag(_), write('You can\'t move'),nl,!.
+
 a:-
 	pos(X,Y),
 	XNew is X-1,
@@ -176,6 +186,9 @@ d :-
 
 d :-
 	pbattleFlag(_), write('You can\'t move during battle'),nl,!.
+
+d :-
+	probbattleFlag(_), write('You can\'t move'),nl,!.
 
 d:-
 	pos(X,Y),
@@ -205,7 +218,7 @@ cekGym:-
 
 cekMusuh :-
 	generateEncounter(Hasil),
-	Hasil = ada -> (write('A wild tokemon appears... fight or run?'), nl);
+	Hasil = ada -> (asserta(probbattleFlag(1)), write('A wild tokemon appears... fight or run?'), nl);
 	(write('Tidak ada tokemon, lanjutkan perjalanan...'),nl,! ),!.
 
 run :-

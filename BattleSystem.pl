@@ -28,7 +28,7 @@ debug_battle :- write('a wild hewwo appears!'),nl,
 /* Pre-Battle */
 init_battle :-
     curMusuh(Enemy,_,_,_,_,_,_,_,_,_,_,_),
-    asserta(pbattleFlag(1)), asserta(spEnemyAvailable(1)),
+    retract(probbattleFlag(_)), asserta(pbattleFlag(1)), asserta(spEnemyAvailable(1)),
     write('a wild '), write(Enemy), write(' appears!'),nl,
     dispTokemon,!.
 
