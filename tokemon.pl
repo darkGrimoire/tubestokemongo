@@ -51,15 +51,15 @@ isTokemon(daemon,legendary,hmif,1011,konsekuensi,200,pencoretan,400,1,0,1000).
 isTokemon(kumon,legendary,fire,1234,english,123,math,456,1,0,1000).
 isTokemon(doraemon,legendary,leaves,950,baling_bambu,300,time_machine,500,1,0,1000).
 
-apakahBisaLevelUp(bisa) :-
+apakahBisaLevelUp(Bisa) :-
     findall(X, (inventory(X,_,_,_,_,_,_,_,Level,CurrExp,NeededExp), Level<3, CurrExp>=NeededExp), ListNonMaxLevel),
     Length(ListNonMaxLevel,Panjang),
-    Panjang/=0 ->
+    Panjang\==0 ->
     (
-        bisa = yes,
+        Bisa = yes,!
     );(
-        bisa = no
-    )!.
+        Bisa = no,!
+    ),!.
     
 levelUp(Tokemon) :-
     retract(inventory(Tokemon,Jenis,Tipe,HP,Nama_attack,Damage_attack,Nama_sp,Damage_sp,Level,CurrExp,NeededExp)),
@@ -71,10 +71,10 @@ generatePeluangMusuh :-
     random(1,10,X),
     X mod 3 is 0 ->
     (
-        ambilMusuhLegendary,
+        ambilMusuhLegendary,!
     );(
-        ambilMusuhNormal
-    )!.
+        ambilMusuhNormal,!
+    ),!.
   
   
 ambilMusuhLegendary :-
