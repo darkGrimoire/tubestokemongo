@@ -1,4 +1,5 @@
 :- include('utils.pl').
+:- include('player.pl').
 :- dynamic(maxInventory/1).
 :- dynamic(equTokemon/6).
 :- dynamic(inventory/6).
@@ -14,13 +15,9 @@
     asserta(curMusuh(hewwo, legendary, fire, 8000, 800, 2500)).
 
 /* Additional functions */
-/* utils->printList(List). */
-printList([]) :- !.
-printList([H|Tail]) :-
-	write(H), printList(Tail),!.
+
 
 /* Pre-Battle */
-
 init_battle :-
     curMusuh(Enemy,Type,EnemyElmt,EnemyHP,EnemyAttack,EnemySpAttack),
     asserta(pbattleFlag(1)), asserta(spEnemyAvailable(1)),
@@ -384,6 +381,12 @@ elmtCalc(leaves, signum, 1).
 
 /* Post-Battle */
 
+dispInventory :-
+    setof(X, X^inventory(X,_,_,_,_,_), YourTokemons),
+    write('Your Tokemons are: ['),
+    printList(YourTokemons),
+    write(']'),nl,!.
+
 capture :-
     winbattleFlag(_),
     cekBanyakTokemon(N),
@@ -393,15 +396,25 @@ capture :-
     write('You captured '), write(Enemy), write('!'),nl,
     endBattle,!.
 
+capture :-
+    winbattleFlag(_),
+    cekBanyakTokemon(N),
+    N > 5,
+    write('Your inventory is full! [drop(X)] a pokemon first!. (use [dispInventory] to see your inventory)'),nl,nl,
+    dispInventory,!.
+
 no :-
     winbattleFlag(_),
     curMusuh(Enemy,_,_,_,_,_),
-    write('The enemy began running away trying to heal somewhere in the woods'),nl,
+    write(Enemy), write(' began running away trying to heal somewhere in the woods'),nl,
     write('What a merciful person you are!'),nl,
     endBattle,!.
 
 endBattle :-
-    retract(curMusuh(Enemy,_,_,_,_,_)).
+    retract(curMusuh(Enemy,_,_,_,_,_)),
+    retract(winbattleFlag(_)),
+    findall(X, musuh(_,_,_))
+    status,!.
 
 
 % loseBattle()
