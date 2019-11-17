@@ -115,7 +115,7 @@ evolve(Tokemon) :-
     inventory(Tokemon,Jenis,Tipe,HP,MaxHP,NamaAtk,DamageAtk,NamaSp,DamageSp,Level,CurrExp,NeededExp),
     NewMaxHP is floor(MaxHP+(MaxHP*(1.9))),
     NewHP is floor(HP+(HP*1.9)),
-    NewDamageAtk is floor(DamageAtk+(DamageAtk*(1.5)),
+    NewDamageAtk is floor(DamageAtk+(DamageAtk*(1.5))),
     NewDamageSp is floor(DamageSp+(DamageAtk*(1.5))),
     retract(inventory(Tokemon,Jenis,Tipe,HP,MaxHP,NamaAtk,DamageAtk,NamaSp,DamageSp,Level,CurrExp,NeededExp)),
     isEvolve(A,Jenis,Tipe,B,C,NamaAtk,D,E,F,G,H,I),
@@ -162,9 +162,9 @@ ambilMusuhLegendary :-
     random(0,Panjang,HasilRandom),
     searchIdx(ListMusuhLegendary,HasilRandom,Tokemon),
     isTokemon(Tokemon,Jenis,Tipe,HP,MaxHP,Nama_attack,Damage_attack,Nama_sp,Damage_sp,Level,CurrExp,NeededExp),
-    musuh(_,Tokemon,Jenis,Tipe,HP,MaxHP,Nama_attack,Damage_attack,Nama_sp,Damage_sp,Level,CurrExp,NeededExp),
+    % musuh(_,Tokemon,Jenis,Tipe,HP,MaxHP,Nama_attack,Damage_attack,Nama_sp,Damage_sp,Level,CurrExp,NeededExp),
     asserta(curMusuh(Tokemon,Jenis,Tipe,HP,MaxHP,Nama_attack,Damage_attack,Nama_sp,Damage_sp,Level,CurrExp,NeededExp)),
-    retract(musuh(_,Tokemon,Jenis,Tipe,HP,MaxHP,Nama_attack,Damage_attack,Nama_sp,Damage_sp,Level,CurrExp,NeededExp)),
+    retract(musuh(_,Tokemon,_,_,_,_,_,_,_,_,_,_,_)),
     init_battle,!.
   
   
@@ -174,15 +174,15 @@ ambilMusuhNormal :-
     random(0,Panjang,HasilRandom),
     searchIdx(ListMusuhNormal,HasilRandom,Tokemon),
     isTokemon(Tokemon,Jenis,Tipe,HP,MaxHP,Nama_attack,Damage_attack,Nama_sp,Damage_sp,Level,CurrExp,NeededExp),
-    musuh(_,Tokemon,Jenis,Tipe,HP,MaxHP,Nama_attack,Damage_attack,Nama_sp,Damage_sp,Level,CurrExp,NeededExp),
+    % musuh(Idx,Tokemon,Jenis,Tipe,HP,MaxHP,Nama_attack,Damage_attack,Nama_sp,Damage_sp,Level,CurrExp,NeededExp),
     asserta(curMusuh(Tokemon,Jenis,Tipe,HP,MaxHP,Nama_attack,Damage_attack,Nama_sp,Damage_sp,Level,CurrExp,NeededExp)),
-    retract(musuh(_,Tokemon,Jenis,Tipe,HP,MaxHP,Nama_attack,Damage_attack,Nama_sp,Damage_sp,Level,CurrExp,NeededExp)),
+    retract(musuh(_,Tokemon,_,_,_,_,_,_,_,_,_,_,_)),
     init_battle,!.
 
 
 generatePeluangRun(X) :- 
-    random(1,10,X),
-    X mod 4 =:= 0 ->
+    random(1,10,Num),
+    Num mod 4 =:= 0 ->
     (
         X = berhasil,!
     );(
