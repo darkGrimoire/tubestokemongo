@@ -24,7 +24,7 @@ save(File) :-
 		%perlu ditambahin apa2 aja yang harus disimpan ke file eksternal
 		writeTokemon,
 		writeMap,
-		%writeMusuh,
+		writeMusuh,
 		writeHeal,
 		writeGame,
 		maxTokemon(Max),
@@ -32,11 +32,11 @@ save(File) :-
 	told, !.
 
 writeTokemon :-
-	\+inventory(_,_,_,_,_,_), !.
+	\+inventory(_,_,_,_,_,_,_,_,_,_,_,_), !.
 
 writeTokemon :-
-	forall(inventory(Tokemon, Type, Elemental, HP, Atk, SpAtk),( 
-		write(inventory(Tokemon, Type, Elemental, HP, Atk, SpAtk)),
+	forall(inventory(Tokemon, Type, Elemental, HP, MaxHP, NamaAtk, Atk, NamaSpAtk, SpAtk, Lvl, CurExp, NeededExp),( 
+		write(inventory(Tokemon, Type, Elemental, HP, MaxHP, NamaAtk, Atk, NamaSpAtk, SpAtk, Lvl, CurExp, NeededExp)),
 		write('.'),nl
 		)), !.
 
@@ -49,7 +49,18 @@ writeMap :-
 	write(tinggipeta(Height)), write('.'), nl,
 	isGym(XGym,YGym),
 	write(isGym(XGym,YGym)), write('.'), nl,
+	writeObstacle,
 	!.
+
+writeObstacle :-
+	\+isObstacle(_,_), !.
+
+writeObstacle :-
+	forall(isObstacle(X,Y), (
+		write(isObstacle(X,Y)), 
+		write('.'), nl
+		)), !.
+
 
 writeHeal :-
 	\+alreadyHeal(_), !.
@@ -70,8 +81,8 @@ writeMusuh :-
 	\+musuh(_,_,_,_,_,_,_), !.
 
 %writeMusuh :-
-	forall(musuh(Idx, Tokemon, Type, Elemental, HP, Atk, SpAtk ),(
-		write(musuh(Idx, Tokemon, Type, Elemental, HP, Atk, SpAtk)),
+	forall(musuh(Idx, Tokemon, Type, Elemental, HP, MaxHP, NamaAtk, Atk, NamaSpAtk, SpAtk, Lvl, CurExp, NeededExp),(
+		write(musuh(Idx, Tokemon, Type, Elemental, HP, MaxHP, NamaAtk, Atk, NamaSpAtk, SpAtk, Lvl, CurExp, NeededExp)),
 		write('.'), nl
 		)), !.
 */
