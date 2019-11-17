@@ -2,6 +2,7 @@
 :- dynamic(tinggipeta/1).
 :- dynamic(isGym/2).
 %:- dynamic(random/3).
+
 init_map :-
     random(10,20,X),
     random(10,20,Y),
