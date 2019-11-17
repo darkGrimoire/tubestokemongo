@@ -1,0 +1,7 @@
+inventory(catamon,normal,water,1000,15,45).
+pos(5,6).
+lebarpeta(18).
+tinggipeta(13).
+isGym(11,15).
+gameStarted(1).
+maxTokemon(6).
