@@ -115,6 +115,11 @@ evolve(Tokemon) :-
     inventory(Tokemon,Jenis,Tipe,HP,MaxHP,NamaAtk,DamageAtk,NamaSp,DamageSp,Level,CurrExp,NeededExp),
     retract(inventory(Tokemon,Jenis,Tipe,HP,MaxHP,NamaAtk,DamageAtk,NamaSp,DamageSp,Level,CurrExp,NeededExp)),
     isEvolve(A,Jenis,Tipe,B,C,NamaAtk,D,E,F,G,H,I),
+    asserta(daemonFlag(_)),
+    write('Shortly after you evolved, the ground crumbles...'),nl,
+    write('The Daemon unleashed as it smells your scent of power...'),nl,
+    write('Will you be able to defeat it?'),nl,nl,
+    asserta(musuh(daemon,superlegendary,hmif,135182,135182,konsekuensi,2000,pencoretan,4000,1,0,10000)),
     asserta(inventory(A,Jenis,Tipe,B,C,NamaAtk,D,E,F,G,H,I)),!.
     
     
@@ -142,14 +147,29 @@ generateEncounter(Encounter) :-
         Encounter = gaada,!
     ),!.
 
-generateMusuh :- 
+generateMusuh :-
+    daemonFlag(_),
     random(1,10,X),
-    X mod 3 =:= 0 ->
+    X mod 4 =:= 0 ->
+    (
+        musuh(_,daemon,Jenis,Tipe,HP,MaxHP,Nama_attack,Damage_attack,Nama_sp,Damage_sp,Level,CurrExp,NeededExp),
+        asserta(curMusuh(daemon,Jenis,Tipe,HP,MaxHP,Nama_attack,Damage_attack,Nama_sp,Damage_sp,Level,CurrExp,NeededExp)),
+        retract(musuh(_,Tokemon,_,_,_,_,_,_,_,_,_,_,_)),
+        init_battle,!
+    );(
+        write('You hear heavy footsteps closing...'),nl,!
+    ),!.
+
+generateMusuh :-
+    \+daemonFlag(_),
+    random(1,10,X),
+    X mod 5 =:= 0 ->
     (
         ambilMusuhLegendary,!
     );(
         ambilMusuhNormal,!
     ),!.
+
   
   
 ambilMusuhLegendary :-
@@ -175,8 +195,13 @@ ambilMusuhNormal :-
     retract(musuh(_,Tokemon,_,_,_,_,_,_,_,_,_,_,_)),
     init_battle,!.
 
+generatePeluangRun(X) :- 
+    daemonFlag(1),
+    write('You can\'t run... You can only accept your final fate.'),nl,
+    X = gagal,!.
 
 generatePeluangRun(X) :- 
+    \+daemonFlag(_),
     random(1,10,Num),
     Num mod 4 =:= 0 ->
     (
@@ -184,6 +209,7 @@ generatePeluangRun(X) :-
     );(
         X = gagal,!
     ),!.
+
     
 init_musuh(0) :- !.
 init_musuh(Banyak) :-
