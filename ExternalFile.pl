@@ -76,16 +76,14 @@ writeGame :-
 	gameStarted(X),
 	write(gameStarted(X)), write('.'), nl, !.
 
-/*
 writeMusuh :-
-	\+musuh(_,_,_,_,_,_,_), !.
+	\+musuh(_,_,_,_,_,_,_,_,_,_,_,_,_), !.
 
-%writeMusuh :-
+writeMusuh :-
 	forall(musuh(Idx, Tokemon, Type, Elemental, HP, MaxHP, NamaAtk, Atk, NamaSpAtk, SpAtk, Lvl, CurExp, NeededExp),(
 		write(musuh(Idx, Tokemon, Type, Elemental, HP, MaxHP, NamaAtk, Atk, NamaSpAtk, SpAtk, Lvl, CurExp, NeededExp)),
 		write('.'), nl
 		)), !.
-*/
 
 %fungsi utility file eksternal
 

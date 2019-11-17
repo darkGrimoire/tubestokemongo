@@ -12,7 +12,11 @@
 :- include('utils.pl').
 :- include('ExternalFile.pl').
 :- include('BattleSystem.pl').
+<<<<<<< HEAD
 %:- include('tokemon.pl').
+=======
+:- include('tokemon.pl').
+>>>>>>> b01fb40fb18bc1fd02ea8b90d54966659f565979
 /*-----------------------------------------*/
 
 start :-
@@ -39,7 +43,7 @@ start :-
     
     init_map,
     init_player,
-    % init_musuh,
+    init_musuh(10),
     asserta(gameStarted(1)),
     !.
 menu:-
