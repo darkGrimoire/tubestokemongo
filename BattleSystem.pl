@@ -20,7 +20,6 @@
 :- dynamic(gameoverFlag/1).
 
 /* For debugging purpose */
-<<<<<<< HEAD
 debugBiasa :- write('a wild hewwo appears!'),nl,
     asserta(inventory(radarmon, normal, signum, 50000, 50000, laprak, 2500, radiasi, 8000,3,10000,10000)),
     asserta(curMusuh(garamon,legendary,water,21020,21020,salt,1200,saltbae,2000,1,0,10000)),!.
@@ -31,11 +30,6 @@ debugDaemon :-
     asserta(inventory(kumon,legendary,fire,12345,12345,english,1234,math,2345,1,0,10000)),
     asserta(daemonFlag(1)),
     asserta(curMusuh(daemon, legendary, hmif, 135182, 135182, konsekuensi, 2000, pencoretan, 4000, 1, 1000, 1000)),!.
-=======
-debug_battle :- write('a wild hewwo appears!'),nl,
-    asserta(inventory(radarmon, normal, signum, 50000, 50000, laprak, 2500, radiasi, 8000,3,10000,10000)),
-    asserta(curMusuh(daemon, legendary, hmif, 135182, 135182, konsekuensi, 2000, pencoretan, 4000, 1, 1000, 1000)).
->>>>>>> 34e155d58f448244705739fb54fd27066058a54b
 
 /* Additional functions */
 % curMusuh(daemon, legendary, hmif, 135182, 135182, konsekuensi, 2000, pencoretan, 4000, 1, 1000, 1000)).
@@ -59,11 +53,7 @@ init_battle :-
 
 % Display Tokemons
 dispTokemon :-
-<<<<<<< HEAD
-    setof(X, X^inventory(X,_,_,_,_,_,_,_,_,_,_,_), YourTokemons),
-=======
     findall(X, inventory(X,_,_,_,_,_,_,_,_,_,_,_), YourTokemons),
->>>>>>> b4abf3ff190664c48b9a61c3078f65573000a3d5
     write('Your Tokemons are: ['),
     printList(YourTokemons),
     write(']'),nl,
@@ -113,10 +103,7 @@ battleStat :-
     \+inbattleFlag(_),!.
 
 battleStat :-
-<<<<<<< HEAD
     print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'),nl,
-    inbattleFlag(_),
-=======
     inbattleFlag(_), defendFlag(_),
     checkDefend,
     curMusuh(EnemyTokemon,_,EnemyElmt,EnemyHP,EnemyMaxHP,_,_,_,_,_,_,_),
@@ -127,11 +114,12 @@ battleStat :-
     write(Tokemon),nl,
     write('Health: '), write(HP), write('/'), write(MaxHP),nl,
     write('Elemental: '), write(Elmt),nl,nl,
+    print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'),nl,
     battleChoice,!.
 
 battleStat :-
+    print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'),nl,
     inbattleFlag(_), \+defendFlag(_),
->>>>>>> b4abf3ff190664c48b9a61c3078f65573000a3d5
     curMusuh(EnemyTokemon,_,EnemyElmt,EnemyHP,EnemyMaxHP,_,_,_,_,_,_,_),
     write('                    Enemy                        '),nl,nl,
     write('               '),write(EnemyTokemon),nl,
@@ -302,6 +290,7 @@ enemyAttack :-
         asserta(selaluBenarCD(3)),
         battleStat,!
     );( % PeluangAttackMusuh mod 3 is not 0
+        daemonFlag(1), selaluBenarAvailable(1),
         daemonNormalAttack,
         checkSelaluBenar,!
     ),!.
@@ -340,18 +329,21 @@ enemyAttack :-
         retract(spEnemyAvailable(_)),
         battleStat,!
     );( % PeluangAttackMusuh mod 3 is not 0
+        \+daemonFlag(_),
+        spEnemyAvailable(_),
         enemyNormalAttack,
         battleStat,!
     ),!.
 
 daemonNormalAttack :-
-    daemonFlag(_),
+    daemonFlag(1),
     random(1,10,PeluangAttackMusuh),
     PeluangAttackMusuh mod 6 =:= 0 ->
     (
         enemySpecialAttack,
         battleStat,!
     );( % PeluangAttackMusuh mod 3 is not 0
+        daemonFlag(1),
         enemyNormalAttack,
         battleStat,!
     ),!.
@@ -421,7 +413,7 @@ enemyNormalAttack :-
         enemyNormalAttackCalc(ElmtModifier),!.
 
 enemyNormalAttackCalc(ElmtModifier) :-
-    % defendFlag(_),
+    defendFlag(_),
     curMusuh(Enemy,EnemyType,EnemyElmt,EnemyHP,EnemyMaxHP,EnemyNameAttack,EnemyAttack,EnemyNameSpAttack,EnemySpAttack,EnemyLevel,EnemyCurEXP,EnemyNeededEXP),
     equTokemon(Tokemon,Type,defend,HP,MaxHP,NameAttack,Attack,NameSpAttack,SpAttack,Level,CurEXP,NeededEXP),
     Damage is EnemyAttack*ElmtModifier,
@@ -441,6 +433,7 @@ enemyNormalAttackCalc(ElmtModifier) :-
         asserta(curMusuh(Enemy,EnemyType,EnemyElmt,NewEnemyHP,EnemyMaxHP,EnemyNameAttack,EnemyAttack,EnemyNameSpAttack,EnemySpAttack,EnemyLevel,EnemyCurEXP,EnemyNeededEXP)),
         !
     );(
+        defendFlag(_),
         retract(equTokemon(Tokemon,_,_,_,_,_)),
         retract(inbattleFlag(_)), asserta(losebattleFlag(1)),
         write('You has fallen!'),nl,
@@ -460,6 +453,7 @@ enemyNormalAttackCalc(ElmtModifier) :-
         asserta(equTokemon(Tokemon,Type,Elmt,NewHP,MaxHP,NameAttack,Attack,NameSpAttack,SpAttack,Level,CurEXP,NeededEXP)),
         !
     );(
+        \+defendFlag(_),
         retract(equTokemon(Tokemon,_,_,_,_,_)),
         retract(inbattleFlag(_)), asserta(losebattleFlag(1)),
         write('You has fallen!'),nl,
@@ -494,7 +488,7 @@ enemySpecialAttack :-
         enemySpecialAttackCalc(ElmtModifier),!.
 
 enemySpecialAttackCalc(ElmtModifier) :-
-    % defendFlag(_),
+    defendFlag(_),
     curMusuh(Enemy,EnemyType,EnemyElmt,EnemyHP,EnemyMaxHP,EnemyNameAttack,EnemyAttack,EnemyNameSpAttack,EnemySpAttack,EnemyLevel,EnemyCurEXP,EnemyNeededEXP),
     equTokemon(Tokemon,Type,defend,HP,MaxHP,NameAttack,Attack,NameSpAttack,SpAttack,Level,CurEXP,NeededEXP),
     Damage is EnemyAttack*ElmtModifier,
@@ -514,6 +508,7 @@ enemySpecialAttackCalc(ElmtModifier) :-
         asserta(curMusuh(Enemy,EnemyType,EnemyElmt,NewEnemyHP,EnemyMaxHP,EnemyNameAttack,EnemyAttack,EnemyNameSpAttack,EnemySpAttack,EnemyLevel,EnemyCurEXP,EnemyNeededEXP)),
         !
     );(
+        defendFlag(_),
         retract(equTokemon(Tokemon,_,_,_,_,_,_,_,_,_,_,_)),
         retract(inbattleFlag(_)), asserta(losebattleFlag(1)),
         write('You has fallen!'),nl,
@@ -533,6 +528,7 @@ enemySpecialAttackCalc(ElmtModifier) :-
         asserta(equTokemon(Tokemon,Type,Elmt,NewHP,MaxHP,NameAttack,Attack,NameSpAttack,SpAttack,Level,CurEXP,NeededEXP)),
         !
     );(
+        \+defendFlag(_),
         retract(equTokemon(Tokemon,_,_,_,_,_,_,_,_,_,_,_)),
         retract(inbattleFlag(_)), asserta(losebattleFlag(1)),
         write('You has fallen!'),nl,

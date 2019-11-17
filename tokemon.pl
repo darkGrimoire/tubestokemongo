@@ -148,7 +148,7 @@ generateEncounter(Encounter) :-
     ),!.
 
 generateMusuh :-
-    daemonFlag(_),
+    daemonFlag(1),
     random(1,10,X),
     X mod 4 =:= 0 ->
     (
@@ -157,6 +157,7 @@ generateMusuh :-
         retract(musuh(_,Tokemon,_,_,_,_,_,_,_,_,_,_,_)),
         init_battle,!
     );(
+        daemonFlag(1),
         write('You hear heavy footsteps closing...'),nl,!
     ),!.
 
