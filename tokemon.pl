@@ -53,7 +53,7 @@ isTokemon(doraemon,legendary,leaves,950,baling_bambu,300,time_machine,500,1,0,10
 
 apakahBisaLevelUp(Bisa) :-
     findall(X, (inventory(X,_,_,_,_,_,_,_,Level,CurrExp,NeededExp), Level<3, CurrExp>=NeededExp), ListNonMaxLevel),
-    Length(ListNonMaxLevel,Panjang),
+    length(ListNonMaxLevel,Panjang),
     Panjang\==0 ->
     (
         Bisa = yes,!
@@ -66,8 +66,16 @@ levelUp(Tokemon) :-
     asserta(inventory(Tokemon,Jenis,Tipe,HP,Nama_attack,Damage_attack+10,Nama_sp,Damage_sp+10,CurrExp,NeededExp+1000)),
     write('Congratzszszs!!! Your '), write(Tokemon), write(' is now on level'), write(level+1), write('!'), nl, !.
     
-  
-generatePeluangMusuh :- 
+generateEncounter(Encounter) :-
+    random(1,10,X),
+    X mod 2 =:= 0 ->
+    (
+        Encounter = ada,!
+    );(
+        Encounter = gaada,!
+    ),!.
+
+generateMusuh :- 
     random(1,10,X),
     X mod 3 =:= 0 ->
     (
@@ -78,7 +86,7 @@ generatePeluangMusuh :-
   
   
 ambilMusuhLegendary :-
-    findAll(X, (musuh(X,Tipe,_,_,_,_,_,_), Tipe == legendary), ListMusuhLegendary),
+    findall(X, (musuh(X,Tipe,_,_,_,_,_,_), Tipe == legendary), ListMusuhLegendary),
     length(ListMusuh, Panjang),
     random(0,Panjang,HasilRandom),
     ambil(ListMusuhLegendary,HasilRandom,Tokemon),
@@ -86,11 +94,11 @@ ambilMusuhLegendary :-
     musuh(_,Tokemon,Jenis,Tipe,HP,Nama_attack,Damage_attack,Nama_sp,Damage_sp,Level,CurrExp,NeededExp),
     asserta(curMusuh(Tokemon,Jenis,Tipe,HP,Nama_attack,Damage_attack,Nama_sp,Damage_sp,Level,CurrExp,NeededExp)),
     retract(musuh(_,Tokemon,Jenis,Tipe,HP,Nama_attack,Damage_attack,Nama_sp,Damage_sp,Level,CurrExp,NeededExp)),
-    battleStart,!.
+    init_battle,!.
   
   
 ambilMusuhNormal :-
-    findAll(X, (musuh(X,Tipe,_,_,_,_,_,_), Tipe == normal), ListMusuhNormal),
+    findall(X, (musuh(X,Tipe,_,_,_,_,_,_), Tipe == normal), ListMusuhNormal),
     length(ListMusuh, Panjang),
     random(0,Panjang,HasilRandom),
     ambil(ListMusuhNormal,HasilRandom,Tokemon),
@@ -98,16 +106,16 @@ ambilMusuhNormal :-
     musuh(_,Tokemon,Jenis,Tipe,HP,Nama_attack,Damage_attack,Nama_sp,Damage_sp,Level,CurrExp,NeededExp),
     asserta(curMusuh(Tokemon,Jenis,Tipe,HP,Nama_attack,Damage_attack,Nama_sp,Damage_sp,Level,CurrExp,NeededExp)),
     retract(musuh(_,Tokemon,Jenis,Tipe,HP,Nama_attack,Damage_attack,Nama_sp,Damage_sp,Level,CurrExp,NeededExp))
-    battleStart,!.
+    init_battle,!.
 
 
 generatePeluangRun(X) :- 
     random (1,10,X),
-    X mod 2 =:= 0 ->
+    X mod 4 =:= 0 ->
     (
-        X = run,
+        X = berhasil,
     );(
-        X = battleStart
+        X = gagal,
     )!.
     
 init_musuh(0) :- !.
