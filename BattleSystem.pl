@@ -34,7 +34,7 @@ init_battle :-
 
 % Display Tokemons
 dispTokemon :-
-    setof(X, inventory(X,_,_,_,_,_,_,_,_,_,_,_), YourTokemons),
+    setof(X, X^inventory(X,_,_,_,_,_,_,_,_,_,_,_), YourTokemons),
     write('Your Tokemons are: ['),
     printList(YourTokemons),
     write(']'),nl,
@@ -84,18 +84,19 @@ battleStat :-
     \+inbattleFlag(_),!.
 
 battleStat :-
-    print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+    print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'),nl,
     inbattleFlag(_),
     curMusuh(EnemyTokemon,_,EnemyElmt,EnemyHP,EnemyMaxHP,_,_,_,_,_,_,_),
-    write('%                    Enemy                        %'),nl,
-    write('%    '),write(EnemyTokemon),write('               %'),nl,
-    write('%    Health:     '), write(EnemyHP), write(' / '), write(EnemyMaxHP)write('          %'),nl,
-    write('%    Elemental:  '), write(EnemyElmt),write('               %'),nl,
-    write('%                    Tokemon                      %'),nl,
+    write('                    Enemy                        '),nl,nl,
+    write('               '),write(EnemyTokemon),nl,
+    write('    Health:'), write(EnemyHP), write(' / '), write(EnemyMaxHP),nl,
+    write('                Elemental:  '), write(EnemyElmt),nl,nl,
+    write('                    Tokemon:                     '),nl,nl,
     equTokemon(Tokemon,_,Elmt,HP,MaxHP,_,_,_,_,_,_,_),
-    write('%                ')write(Tokemon),write('                    %'),nl,
-    write('%    Health: '), write(HP), write('/'), write(MaxHP),write('             %'),nl,
-    write('%    Elemental: '), write(Elmt),write('                   %')nl,nl,
+    write('                '),write(Tokemon),nl,
+    write('    Health: '), write(HP), write('/'), write(MaxHP),nl,
+    write('    Elemental: '), write(Elmt),nl,nl,
+    print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'),nl,
     battleChoice,!.
 
 battleChoice :-
@@ -161,6 +162,8 @@ attackCalc(ElmtModifier) :-
         enemyAttack,!
     );(
         retract(inbattleFlag(_)), asserta(winbattleFlag(1)),
+        retract(equTokemon(Tokemon,Type,Elmt,HP,MaxHP,NameAttack,Attack,NameSpAttack,SpAttack,Level,CurEXP,NeededEXP)),
+        asserta(inventory(Tokemon,Type,Elmt,HP,MaxHP,NameAttack,Attack,NameSpAttack,SpAttack,Level,CurEXP,NeededEXP)),
         write('The enemy has fallen! [capture] or [no]?'),nl,!
     ),!.
 
@@ -218,6 +221,8 @@ specialAttackCalc(ElmtModifier) :-
     );(
         % retract(curMusuh(Enemy,_,_,_,_,_)),
         retract(inbattleFlag(_)), asserta(winbattleFlag(1)),
+        retract(equTokemon(Tokemon,Type,Elmt,HP,MaxHP,NameAttack,Attack,NameSpAttack,SpAttack,Level,CurEXP,NeededEXP)),
+        asserta(inventory(Tokemon,Type,Elmt,HP,MaxHP,NameAttack,Attack,NameSpAttack,SpAttack,Level,CurEXP,NeededEXP)),
         write('The enemy has fallen! [capture] or [no]?'),nl,!
     ),!.
 
