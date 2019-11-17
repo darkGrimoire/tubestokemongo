@@ -11,50 +11,8 @@ init_map :-
     random(1,TMax,A),
     random(1,LMax,B),
     asserta(isGym(A,B)).
-<<<<<<< HEAD
 
 
-=======
- 
-/*
- isBorderAtas(_,Y):-
- 	Y =:= 0,
- 	!.
- isBorderBawah(X,_):-
- 	X =:= 0,
- 	!.
- isBorderKanan(X,_):-
- 	tinggipeta(T),
- 	Xmax is T+1,
- 	X =:= Xmax,
-
- 	!.
- isBorderKiri(_,Y):-
- 	lebarpeta(T),
- 	Ymax is T+1,
- 	Y =:= Ymax.
-*/
-
-isBorderAtas(X,_):-
-   tinggipeta(T),
-   Xmax is T+1,
-   X =:= Xmax,
-   !.
-
-isBorderBawah(X,_):-
-   X =:= 0,
-   !.
-
-isBorderKanan(_,Y):-
-   lebarpeta(T),
-   Ymax is T+1,
-   Y =:= Ymax,
-   !.
-
-isBorderKiri(_,Y):-
-    Y =:= 0,
-    !.
->>>>>>> cadbb6b803afbb344e6c9419403ec933791020b9
 
     isBorderBawah(_,Y):-
       tinggipeta(T),
@@ -132,11 +90,8 @@ printMap(X,Y):-
 printMap(X,Y):-
  	isBorderAtas(X,Y),!, write('X').
 printMap(X,Y):-
-<<<<<<< HEAD
    isObstacle(X,Y),!,write('X').
  printMap(X,Y):-
-=======
->>>>>>> cadbb6b803afbb344e6c9419403ec933791020b9
     pos(X,Y),!, write('P').
 printMap(X,Y):-
     isGym(X,Y),!, write('G').
