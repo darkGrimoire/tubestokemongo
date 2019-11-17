@@ -1,6 +1,6 @@
-:-dynamic(tokemon/11).  /*tokemon(nama)*/
+:-dynamic(tokemon/12).  /*tokemon(nama)*/
 
-/*isTokemon(nama,jenis,tipe,hp,maxhp,nama_attack,damage_attack,nama_sp_attack,damage_sp_attack,level,currExp,neededExp) */
+/*isTokemon(Nama,Jenis,Tipe,HP,MaxHP,NamaAtk,DamageAtk,NamaSp,DamageSp,Level,CurrExp,NeededExp) */
 
 isTokemon(catamon,normal,water,HP,5000,cakar_aja,A,cakar_banget,SA,1,0,1000) :-
     random(4700,5000,HP),
@@ -85,8 +85,8 @@ levelUp(Tokemon) :-
     random(BatasBawah, BatasAtas, PlusHP),
     NewMaxHP is floor(MaxHP+PlusHP),
     NewHP is floor(HP+(PlusHP*0.75)),
-    NewDamageAtk is (Damage+(0.1*PlusHP)),
-    NewDamageSp is (Sp+(0.1*PlusHP)),
+    NewDamageAtk is (DamageAtk+(0.1*PlusHP)),
+    NewDamageSp is (DamageSp+(0.1*PlusHP)),
     retract(inventory(Tokemon,Jenis,Tipe,HP,MaxHP,NamaAtk,DamageAtk,NamaSp,DamageSp,Level,CurrExp,NeededExp)),
     asserta(inventory(Tokemon,Jenis,Tipe,NewHP,NewMaxHP,NamaAtk,NewDamageAtk,NamaSp,NewDamageSp,NewLevel,CurrExp,NewNededExp)),
     write('Congratzszszs!!! Your '), write(Tokemon), write(' is now on level '), write(NewLevel), write('!'), nl, !.
