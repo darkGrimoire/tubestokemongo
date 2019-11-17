@@ -69,7 +69,7 @@ levelUp(Tokemon) :-
   
 generatePeluangMusuh :- 
     random(1,10,X),
-    X mod 3 is 0 ->
+    X mod 3 =:= 0 ->
     (
         ambilMusuhLegendary,!
     );(
