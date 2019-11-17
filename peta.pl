@@ -32,49 +32,50 @@ init_map :-
  	Y =:= Ymax.
 */
 
- isBorderAtas(X,_):-
-    tinggipeta(T),
-    Xmax is T+1,
-    X =:= Xmax,
-    !.
- isBorderBawah(X,_):-
-    X =:= 0,
-    !.
+isBorderAtas(X,_):-
+   tinggipeta(T),
+   Xmax is T+1,
+   X =:= Xmax,
+   !.
 
- isBorderKanan(_,Y):-
-    lebarpeta(T),
-    Ymax is T+1,
-    Y =:= Ymax,
-    !.
+isBorderBawah(X,_):-
+   X =:= 0,
+   !.
 
- isBorderKiri(_,Y):-
+isBorderKanan(_,Y):-
+   lebarpeta(T),
+   Ymax is T+1,
+   Y =:= Ymax,
+   !.
+
+isBorderKiri(_,Y):-
     Y =:= 0,
     !.
 
 
- printMap(X,Y):-
+printMap(X,Y):-
  	isBorderKiri(X,Y),!, write('X').
- printMap(X,Y):-
+printMap(X,Y):-
  	isBorderKanan(X,Y),!,write('X').
- printMap(X,Y):-
+printMap(X,Y):-
  	isBorderBawah(X,Y),!,write('X').
- printMap(X,Y):-
+printMap(X,Y):-
  	isBorderAtas(X,Y),!, write('X').
- printMap(X,Y):-
+printMap(X,Y):-
     pos(X,Y),!, write('P').
- printMap(X,Y):-
+printMap(X,Y):-
     isGym(X,Y),!, write('G').
- printMap(_,_):-
+printMap(_,_):-
     write('-').
- printprio(X,Y):-
+printprio(X,Y):-
     isBorderKanan(X,Y),!, write('X').
- printprio(X,Y):-
+printprio(X,Y):-
     isBorderKiri(X,Y),!, write('X').
- printprio(X,Y):-
+printprio(X,Y):-
     isBorderAtas(X,Y),!, write('X').
- printprio(X,Y):-
+printprio(X,Y):-
     isBorderBawah(X,Y),!, write('X').
- printprio(X,Y):-
+printprio(X,Y):-
     isGym(X,Y),!, write('G').
    
  
