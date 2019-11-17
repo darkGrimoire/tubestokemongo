@@ -47,7 +47,7 @@ init_battle :-
 init_battle :-
     daemonFlag(_),
     curMusuh(Enemy,_,_,_,_,_,_,_,_,_,_,_),
-    asserta(pbattleFlag(1)), asserta(selaluBenarAvailable(1)),
+    retract(probbattleFlag(_)), asserta(pbattleFlag(1)), asserta(selaluBenarAvailable(1)),
     write('The Daemon appears menacingly in front of you...'),nl,
     dispTokemon,!.
 
