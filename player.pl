@@ -231,11 +231,7 @@ status :-
 
 		write('  --> '), write('Name: '), write(Tokemon), nl,
 		write('      Elemental: '), write(Elemental), nl,
-		write('      Health: '), write(HP), write('/'), write(MaxHP), nl,
 		write('      Skill Attack [Damage]: '), write(NamaAtk), write(' ['), write(Atk), write(']'), nl,
 		write('      Skill Special Attack [Damage]: '), write(NamaSpAtk), write(' ['), write(SpAtk), write(']'), nl,
 		write('      Level: '), write(Lvl), nl,
-		write('      XP: '), write(CurExp), nl,
-		write('      XP yang dibutuhkan buat naik level: '), write(NeededExp), nl
-
 		)).
