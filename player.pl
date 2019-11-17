@@ -112,13 +112,8 @@ s :-
 	Y < Z,
 	YNew is Y+1,
 	asserta(pos(X,YNew)),
-	ceks,!.
+	cekGym,!.
 
-ceks:-
-	pos(X,Y),
-	isGym(X,Y),
-	write('Wah Anda telah sampai di Gym'),nl,
-	write('Bugarkan kembali para Tokemon Anda, dengan command: heal. '),!.
 w:-
 	pos(X,Y),
 	YNew is Y - 1,
@@ -137,18 +132,15 @@ w :-
 	Y > 1,
 	YNew is Y-1,
 	asserta(pos(X,YNew)),
-	cekw,!.
-cekw:-
-	pos(X,Y),
-	isGym(X,Y),
-	write('Wah Anda telah sampai di Gym'),nl,
-	write('Bugarkan kembali para Tokemon Anda, dengan command: heal. '),!.
+	cekGym,!.
+
 a:-
 	pos(X,Y),
 	XNew is X-1,
 	isObstacle(XNew,Y),
 	write('Perjalan Anda terhalang oleh tembok besar!'),nl,
 	write('Anda harus putar balik dan cari jalan yang lebih aman!'),nl,!.
+
 a :-
 	pos(X,_),
 	X =:= 1, 
@@ -159,12 +151,7 @@ a :-
 	retract(pos(X,Y)),
 	X > 1,
 	XNew is X-1,
-	asserta(pos(XNew,Y)),ceka,!.
-ceka:-
-	pos(X,Y),
-	isGym(X,Y),
-	write('Wah Anda telah sampai di Gym'),nl,
-	write('Bugarkan kembali para Tokemon Anda, dengan command: heal. '),!.
+	asserta(pos(XNew,Y)),cekGym,!.
 
 d:-
 	pos(X,Y),
@@ -179,19 +166,37 @@ d :-
 	X =:= Z, 	
 	write('Wahhh Anda sudah berkeliling sampai ke ujung timur dunia!!'), nl,
 	write('Anda perlu berbalik dan mencari Tokemon di penjuru dunia lain!!'),!.
+
 d :-
 	retract(pos(X,Y)),
 	lebarpeta(Z),
 	X < Z,
 	XNew is X+1,
-	asserta(pos(XNew,Y)),cekd,!.
-cekd:-
+	asserta(pos(XNew,Y)),cekGym,!.
+
+cekGym:-
 	pos(X,Y),
 	isGym(X,Y),
 	write('Wah Anda telah sampai di Gym'),nl,
 	write('Bugarkan kembali para Tokemon Anda, dengan command: heal. '),!.
 
-
+/*
+cekMusuh :-
+	/*
+	generateEncounter(Hasil),
+	Hasil == ada/gaada
+	ada -->
+		write('run/fight'),
+		run -->
+			generatePeluangRun(Hasil2),
+			Hasil2 == berhasil/gagal,
+			berhasil --> balik ke sebelumnya
+			write(gagal),
+			fight
+		fight --> generateMusuh,!.
+	gaada --> balik,!.
+	*/
+*/
 
 %cek status
 
@@ -205,18 +210,19 @@ status :-
 
 	cekBanyakTokemon(Banyak), cekBanyakLegendaryTokemon(BanyakLegendary),
 	write('You have acquired '), write(Banyak), write(' tokemons!!'), nl, N is 1,
-	write('...dengan '), write(BanyakLegendary), write(' di antaranya adalah legendary! WOW!'),
+	write('...dengan '), write(BanyakLegendary), write(' di antaranya adalah legendary! WOW!'), nl,
 	forall(inventory(Tokemon, Type, Elemental, HP, MaxHP, NamaAtk, Atk, NamaSpAtk, SpAtk, Lvl, CurExp, NeededExp), (
 
 		write('  --> '), write('Name: '), write(Tokemon), nl,
 		write('      Type: '), write(Type), nl,
 		write('      Elemental: '), write(Elemental), nl,
 		write('      Health: '), write(HP), nl,
+		write('      Max Health: '), write(MaxHP), nl,
 		write('      Nama Skill Attack: '), write(NamaAtk), nl,
 		write('      Attack: '), write(Atk), nl,
 		write('      Nama Skill Special Attack: '), write(NamaSpAtk), nl,
 		write('      Special Attack: '), write(SpAtk), nl,
-		write('      Level Tokemon: '), write(Level), nl,
+		write('      Level Tokemon: '), write(Lvl), nl,
 		write('      Current XP: '), write(CurExp), nl,
 		write('      XP yang dibutuhkan buat naik level: '), write(NeededExp), nl
 
@@ -228,11 +234,12 @@ status :-
 		write('  --> '), write('Name: '), write(Tokemon), nl,
 		write('      Elemental: '), write(Elemental), nl,
 		write('      Health: '), write(HP), nl,
+		write('      Max Health: '), write(MaxHP), nl,
 		write('      Nama Skill Attack: '), write(NamaAtk), nl,
 		write('      Attack: '), write(Atk), nl,
 		write('      Nama Skill Special Attack: '), write(NamaSpAtk), nl,
 		write('      Special Attack: '), write(SpAtk), nl,
-		write('      Level Tokemon: '), write(Level), nl,
+		write('      Level Tokemon: '), write(Lvl), nl,
 		write('      Current XP: '), write(CurExp), nl,
 		write('      XP yang dibutuhkan buat naik level: '), write(NeededExp), nl
 

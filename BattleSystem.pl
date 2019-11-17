@@ -423,7 +423,7 @@ endBattle :-
     retract(curMusuh(Enemy,_,_,_,_,_,_,_,_,_,_,_)),
     retract(winbattleFlag(_)),
     cekLegendaryObj,
-    menu,!.
+    !.
 
 cekLegendaryObj :-
     \+winbattleFlag(_),!.
@@ -436,7 +436,7 @@ cekLegendaryObj :-
     write('Your journey doesn\'t end here, cap\'n!'),nl,
     write('There are still '), write(Len), write(' legendary tokemon(s) left.'),nl,
     write('Check your status to see their name\'s.'),nl,nl,
-    menu,!.
+    !.
 
 
 loseBattle :-
@@ -458,4 +458,4 @@ loseBattle :-
     write('You watch powerlessly seeing your tokemon dies in front of you...'),nl,
     write('You have no tokemon left. You lose.'),nl,nl,
     retract(curMusuh(_,_,_,_,_,_,_,_,_,_,_,_)),retract(losebattleFlag(_)), asserta(gameoverFlag(_)),
-    gameOver,!.
+    !.
