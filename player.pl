@@ -233,5 +233,5 @@ status :-
 		write('      Elemental: '), write(Elemental), nl,
 		write('      Skill Attack [Damage]: '), write(NamaAtk), write(' ['), write(Atk), write(']'), nl,
 		write('      Skill Special Attack [Damage]: '), write(NamaSpAtk), write(' ['), write(SpAtk), write(']'), nl,
-		write('      Level: '), write(Lvl), nl,
+		write('      Level: '), write(Lvl), nl
 		)).
