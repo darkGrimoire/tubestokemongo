@@ -16,9 +16,9 @@
 :- dynamic(gameoverFlag/1).
 
 /* For debugging purpose */
-% :- write('a wild hewwo appears!'),nl,
-%     asserta(inventory(radarmon, normal, signum, 50000, 50000, laprak, 2500, radiasi, 8000,3,10000,10000)),
-%     asserta(curMusuh(daemon, legendary, hmif, 135182, 135182, konsekuensi, 2000, pencoretan, 4000, 1, 1000, 1000)).
+debug_battle :- write('a wild hewwo appears!'),nl,
+    asserta(inventory(radarmon, normal, signum, 50000, 50000, laprak, 2500, radiasi, 8000,3,10000,10000)),
+    asserta(curMusuh(daemon, legendary, hmif, 135182, 135182, konsekuensi, 2000, pencoretan, 4000, 1, 1000, 1000)).
 
 /* Additional functions */
 % curMusuh(daemon, legendary, hmif, 135182, 135182, konsekuensi, 2000, pencoretan, 4000, 1, 1000, 1000)).
@@ -84,15 +84,18 @@ battleStat :-
     \+inbattleFlag(_),!.
 
 battleStat :-
+    print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
     inbattleFlag(_),
     curMusuh(EnemyTokemon,_,EnemyElmt,EnemyHP,EnemyMaxHP,_,_,_,_,_,_,_),
-    write(EnemyTokemon),nl,
-    write('Health: '), write(EnemyHP), write('/'), write(EnemyMaxHP),nl,
-    write('Elemental: '), write(EnemyElmt),nl,
+    write('%                    Enemy                        %'),nl,
+    write('%    '),write(EnemyTokemon),write('               %'),nl,
+    write('%    Health:     '), write(EnemyHP), write(' / '), write(EnemyMaxHP)write('          %'),nl,
+    write('%    Elemental:  '), write(EnemyElmt),write('               %'),nl,
+    write('%                    Tokemon                      %'),nl,
     equTokemon(Tokemon,_,Elmt,HP,MaxHP,_,_,_,_,_,_,_),
-    write(Tokemon),nl,
-    write('Health: '), write(HP), write('/'), write(MaxHP),nl,
-    write('Elemental: '), write(Elmt),nl,nl,
+    write('%                ')write(Tokemon),write('                    %'),nl,
+    write('%    Health: '), write(HP), write('/'), write(MaxHP),write('             %'),nl,
+    write('%    Elemental: '), write(Elmt),write('                   %')nl,nl,
     battleChoice,!.
 
 battleChoice :-
