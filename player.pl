@@ -86,13 +86,17 @@ heal :-
 		)),
 
 	write('Semua tokemon sudah di-heal!!! yey :D '), nl,
-	write('Sekarang Tokemon Anda, dalam kondisi terbaik dan siap untuk memburu Tokemon Legendary'), nl, !.
+	write('Sekarang Tokemon Anda, dalam kondisi terbaik dan siap untuk memburu Tokemon Legendary'), nl,
 	asserta(alreadyHeal(sudah)), !.
 
 
 %jalan
-
-%gabisa jalan ke atas
+s:-
+	pos(X,Y),
+	YNew is Y+1,
+	isObstacle(X,YNew),
+	write('Perjalan Anda terhalang oleh tembok besar!'),nl,
+	write('Anda harus putar balik dan cari jalan yang lebih aman!'),nl,!.
 s :-
 	pos(_,Y),
 	tinggipeta(Z),
@@ -100,20 +104,25 @@ s :-
 	write('Wahhh Anda sudah berkeliling sampai ke penjuru selatan dunia!!'), nl,
 	write('Anda perlu berbalik dan mencari Tokemon di penjuru dunia lain!!'),!.
 
-%bisa jalan ke atas
-s:-
-	pos(X,Y),
-	isObstacle(A,B),
-	Y =:= B,
-	X =:= A,
-	write('Perjalan Anda terhalang oleh tembok besar!'),nl,
-	write('Anda harus putar balik dan cari jalan yang lebih aman!'),nl,!.
 s :-
 	retract(pos(X,Y)),
 	tinggipeta(Z),
 	Y < Z,
 	YNew is Y+1,
-	asserta(pos(X,YNew)),!.
+	asserta(pos(X,YNew)),
+	ceks,!.
+
+ceks:-
+	pos(X,Y),
+	isGym(X,Y),
+	write('Wah Anda telah sampai di Gym'),nl,
+	write('Bugarkan kembali para Tokemon Anda, dengan command: heal. '),!.
+w:-
+	pos(X,Y),
+	YNew is Y - 1,
+	isObstacle(X,YNew),
+	write('Perjalan Anda terhalang oleh tembok besar!'),nl,
+	write('Anda harus putar balik dan cari jalan yang lebih aman!'),nl,!.
 
 w :-
 	pos(_,Y),
@@ -125,12 +134,17 @@ w :-
 	retract(pos(X,Y)),
 	Y > 1,
 	YNew is Y-1,
-	asserta(pos(X,YNew)),!.
-w:-
+	asserta(pos(X,YNew)),
+	cekw,!.
+cekw:-
 	pos(X,Y),
-	isObstacle(A,B),
-	Y =:= B,
-	X =:= A,
+	isGym(X,Y),
+	write('Wah Anda telah sampai di Gym'),nl,
+	write('Bugarkan kembali para Tokemon Anda, dengan command: heal. '),!.
+a:-
+	pos(X,Y),
+	XNew is X-1,
+	isObstacle(XNew,Y),
 	write('Perjalan Anda terhalang oleh tembok besar!'),nl,
 	write('Anda harus putar balik dan cari jalan yang lebih aman!'),nl,!.
 a :-
@@ -143,12 +157,17 @@ a :-
 	retract(pos(X,Y)),
 	X > 1,
 	XNew is X-1,
-	asserta(pos(XNew,Y)),!.
-a:-
+	asserta(pos(XNew,Y)),ceka,!.
+ceka:-
 	pos(X,Y),
-	isObstacle(A,B),
-	Y =:= B,
-	X =:= A,
+	isGym(X,Y),
+	write('Wah Anda telah sampai di Gym'),nl,
+	write('Bugarkan kembali para Tokemon Anda, dengan command: heal. '),!.
+
+d:-
+	pos(X,Y),
+	XNew is X+1,
+	isObstacle(XNew,Y),
 	write('Perjalan Anda terhalang oleh tembok besar!'),nl,
 	write('Anda harus putar balik dan cari jalan yang lebih aman!'),nl,!.
 
@@ -163,14 +182,12 @@ d :-
 	lebarpeta(Z),
 	X < Z,
 	XNew is X+1,
-	asserta(pos(XNew,Y)),!.
-d:-
+	asserta(pos(XNew,Y)),cekd,!.
+cekd:-
 	pos(X,Y),
-	isObstacle(A,B),
-	Y =:= B,
-	X =:= A,
-	write('Perjalan Anda terhalang oleh tembok besar!'),nl,
-	write('Anda harus putar balik dan cari jalan yang lebih aman!'),nl,!.
+	isGym(X,Y),
+	write('Wah Anda telah sampai di Gym'),nl,
+	write('Bugarkan kembali para Tokemon Anda, dengan command: heal. '),!.
 
 
 
