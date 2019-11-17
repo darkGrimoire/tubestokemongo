@@ -30,7 +30,7 @@ start :-
     write('Let the game BEGINS!'),nl,nl,
     init_map,
     init_player,
-    % init_musuh,
+    init_musuh(10),
     asserta(gameStarted(1)),
     !.
 

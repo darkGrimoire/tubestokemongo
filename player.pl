@@ -204,7 +204,7 @@ status :-
 	write('You are currently in coordinate '), write(X), write(','), write(Y), nl,
 
 	cekBanyakTokemon(Banyak), cekBanyakLegendaryTokemon(BanyakLegendary),
-	write('You have acquired '), write(Banyak), write(' tokemons!!'), nl,
+	write('You have acquired '), write(Banyak), write(' tokemons!!'), nl, N is 1,
 	write('...dengan '), write(BanyakLegendary), write(' di antaranya adalah legendary! WOW!'),
 	forall(inventory(Tokemon, Type, Elemental, HP, MaxHP, NamaAtk, Atk, NamaSpAtk, SpAtk, Lvl, CurExp, NeededExp), (
 
@@ -218,12 +218,12 @@ status :-
 		write('      Special Attack: '), write(SpAtk), nl,
 		write('      Level Tokemon: '), write(Level), nl,
 		write('      Current XP: '), write(CurExp), nl,
-		write('      XP yang dibutuhkan buat naik level: ', write(NeededExp)), nl
+		write('      XP yang dibutuhkan buat naik level: '), write(NeededExp), nl
 
 		)),
 
 	write('Here are the legendary tokemons you still have to seek...'), nl,
-	forall(isTokemon(Tokemon, legendary, Elemental, HP, MaxHP, NamaAtk, Atk, NamaSpAtk, SpAtk, Lvl, CurExp, NeededExp), (
+	forall(musuh(Idx,Tokemon, legendary, Elemental, HP, MaxHP, NamaAtk, Atk, NamaSpAtk, SpAtk, Lvl, CurExp, NeededExp), (
 
 		write('  --> '), write('Name: '), write(Tokemon), nl,
 		write('      Elemental: '), write(Elemental), nl,
@@ -234,6 +234,6 @@ status :-
 		write('      Special Attack: '), write(SpAtk), nl,
 		write('      Level Tokemon: '), write(Level), nl,
 		write('      Current XP: '), write(CurExp), nl,
-		write('      XP yang dibutuhkan buat naik level: ', write(NeededExp)), nl
+		write('      XP yang dibutuhkan buat naik level: '), write(NeededExp), nl
 
 		)).
