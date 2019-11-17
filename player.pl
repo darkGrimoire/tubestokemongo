@@ -1,60 +1,63 @@
 :- dynamic(pos/2).
 :- dynamic(maxTokemon/1).
-:- dynamic(tokemon/6).
-:- dynamic(inventory/6).
+:- dynamic(musuh/13).
+:- dynamic(inventory/12).
 :- dynamic(gameStarted/1).
 :- dynamic(alreadyHeal/1).
 
-%contoh data
 
-%--------------------------------------------------------------------------
-%------------------- player.pl STARTS HERE --------------------------------
-%--------------------------------------------------------------------------
 
 %inisialisasi fakta player, masukin ke init_player
 
 init_player :-
-    asserta(inventory(catamon,normal,water,1000,15,45)),
-    asserta(pos(5,6)), %bisa dirandom juga mungkin ini posisi awalnya (?)
-	asserta(maxTokemon(6)).
+	random(4700,5000,HP),
+    random(500,600,A),
+    random(700,800,SA),
+    asserta(inventory(catamon,normal,water,HP,5000,cakar_aja,A,cakar_banget,SA,1,0,1000)),
+	asserta(maxTokemon(6)),
+    tinggipeta(Height), lebarpeta(Width),
+    H is Height+1, W is Width+1,
+    random(1,H,Y),
+    random(1,W,X),
+    asserta(pos(X,Y)).
 
 
 %cari banyak tokemon yang lagi dipunya
 
 cekBanyakTokemon(Banyak) :-
-	findall(B, inventory(B,_,_,_,_,_), ListTokemon),
+	findall(B, inventory(B,_,_,_,_,_,_,_,_,_,_,_), ListTokemon),
 	length(ListTokemon, Banyak), !.
 
 cekBanyakLegendaryTokemon(Banyak) :-
-	findall(_, inventory(_, legendary, _, _, _, _), ListTokemon),
+	findall(_, inventory(_, legendary, _, _, _, _,_,_,_,_,_,_), ListTokemon),
 	length(ListTokemon, Banyak), !.
 
 %Nambahin tokemon, cek dulu banyak tokemon di database
 
-addTokemon(_,_,_,_,_,_) :-
+addTokemon(_,_,_,_,_,_,_,_,_,_,_,_) :-
 	cekBanyakTokemon(Banyak),
 	maxTokemon(Maks),
 	(Banyak+1) > Maks , !, fail.
 
-addTokemon(Tokemon, Type, Elemental, HP, Atk, SpAtk) :-
-	asserta(inventory(Tokemon, Type, Elemental, HP, Atk, SpAtk)).
+addTokemon(Tokemon, Type, Elemental, HP, MaxHP, NamaAtk, Atk, NamaSpAtk, SpAtk, Lvl, CurExp, NeededExp) :-
+	asserta(inventory(Tokemon, Type, Elemental, HP, MaxHP, NamaAtk, Atk, NamaSpAtk, SpAtk, Lvl, CurExp, NeededExp)).
 
 %kalau mau drop pokemon
 
 drop(X) :-
 	\+winbattleFlag(_),
-	\+inventory(X,_,_,_,_,_),
+	\+inventory(X,_,_,_,_,_,_,_,_,_,_,_),
 	write('You do not have tokemon '), write(X), nl,
 	write('Mari kita cari Tokemon tersebut dan lawan  tokemon - tokemon lain!!'), nl.
 
 drop(X) :-
 	\+winbattleFlag(_),
-	retract(inventory(X,_,_,_,_,_)),
+	retract(inventory(X,_,_,_,_,_,_,_,_,_,_,_)),
 	write('You have dropped tokemon '), write(X), nl.
 
 drop(X) :-
 	winbattleFlag(_),
-	retract(inventory(X,_,_,_,_,_)),
+	retract(inventory(X,_,_,_,_,_,_,_,_,_,_,_)),
 	write('You have dropped tokemon '), write(X), nl,
 	capture,!.
 
@@ -77,11 +80,10 @@ heal :-
 
 heal :-
 	pos(X,Y), isGym(A,B), X =:= A, Y =:= B, \+alreadyHeal(_),
-	forall(inventory(Tokemon, Type, Elemental, _, Atk, SpAtk), (
+	forall(inventory(Tokemon, Type, Elemental, _, MaxHP, NamaAtk, Atk, NamaSpAtk, SpAtk, Lvl, CurExp, NeededExp), (
 
-		isTokemon(Tokemon, _, _, MaxHP, _, _),
 		retract(inventory(Tokemon, _, _, _, _, _)),
-		asserta(inventory(Tokemon, Type, Elemental, MaxHP, Atk, SpAtk))
+		asserta(inventory(Tokemon, Type, Elemental, MaxHP, MaxHP, NamaAtk, Atk, NamaSpAtk, SpAtk, Lvl, CurExp, NeededExp))
 
 		)),
 
