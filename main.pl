@@ -7,9 +7,10 @@
 */
 
 /* INCLUDES */
-% :- include('peta.pl').
+%:- include('peta.pl').
 :- include('player.pl').
 :- include('utils.pl').
+:- include('ExternalFile.pl').
 /*-----------------------------------------*/
 
 start :-
@@ -65,8 +66,11 @@ map :-
     write('G    :    Gym'), nl,
 !.
 
+
 quit :-
     retract(gameStarted(_)),
+    write('Dadah.'), nl,
     halt.
+
 
 

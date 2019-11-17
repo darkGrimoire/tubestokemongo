@@ -27,4 +27,8 @@ searchIdx([_|LTail],Pos,C) :-
 % appendList(e, List, ListResult)
 appendList(X,L,[X|L]).
 
-% assertaList()
+assertaList([]) :- !.
+
+assertaList([X|L]) :-
+	asserta(X),
+	assertaList(L), !.
