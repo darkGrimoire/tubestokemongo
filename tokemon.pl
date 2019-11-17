@@ -103,7 +103,7 @@ ambilMusuhNormal :-
 
 generatePeluangRun(X) :- 
     random (1,10,X),
-    X mod 2 is 0 ->
+    X mod 2 =:= 0 ->
     (
         X = run,
     );(
