@@ -1,4 +1,3 @@
-:- include('peta.pl').
 :- dynamic(pos/2).
 :- dynamic(maxTokemon/1).
 :- dynamic(tokemon/6).
@@ -23,9 +22,12 @@ init_player :-
 %cari banyak tokemon yang lagi dipunya
 
 cekBanyakTokemon(Banyak) :-
-	findall(B, tokemon(B,_,_,_,_,_), ListTokemon),
-	length(ListTokemon, Banyak).
+	findall(B, inventory(B,_,_,_,_,_), ListTokemon),
+	length(ListTokemon, Banyak), !.
 
+cekBanyakLegendaryTokemon(Banyak) :-
+	findall(_, inventory(_, legendary, _, _, _, _), ListTokemon),
+	length(ListTokemon, Banyak), !.
 
 %Nambahin tokemon, cek dulu banyak tokemon di database
 

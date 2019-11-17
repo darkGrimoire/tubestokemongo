@@ -1,17 +1,5 @@
-%:- include('peta.pl').
-%:- include('player.pl').
-%:- include('utils.pl').
-%:- include('tokemon.pl')
 
-%:- dynamic(inventory/6).
-%:- dynamic(pos/2).
-%:- dynamic(maxTokemon/1).
-%:- dynamic(tokemon/6).
-%:- dynamic(inventory/6).
-%:- dynamic(gameStarted/1).
-%:- dynamic(alreadyHeal/1).
-%:- dynamic(musuh/7).
-
+%predikat untuk load dan save 
 
 loadd(_) :-
 	gameStarted(_),
@@ -33,6 +21,7 @@ save(_) :-
 
 save(File) :-
 	tell(File),
+		%perlu ditambahin apa2 aja yang harus disimpan ke file eksternal
 		writeTokemon,
 		writeMap,
 		%writeMusuh,
