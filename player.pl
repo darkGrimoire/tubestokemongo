@@ -112,7 +112,7 @@ s :-
 	Y < Z,
 	YNew is Y+1,
 	asserta(pos(X,YNew)),
-	cekGym,!.
+	isGym(X,YNew) -> (cekGym);(cekMusuh) ,!.
 
 w:-
 	pos(X,Y),
@@ -132,7 +132,7 @@ w :-
 	Y > 1,
 	YNew is Y-1,
 	asserta(pos(X,YNew)),
-	cekGym,!.
+	isGym(X,YNew) -> (cekGym);(cekMusuh) ,!.
 
 a:-
 	pos(X,Y),
@@ -151,7 +151,8 @@ a :-
 	retract(pos(X,Y)),
 	X > 1,
 	XNew is X-1,
-	asserta(pos(XNew,Y)),cekGym,!.
+	asserta(pos(XNew,Y)),
+	isGym(X,YNew) -> (cekGym);(cekMusuh) ,!.
 
 d:-
 	pos(X,Y),
@@ -172,31 +173,32 @@ d :-
 	lebarpeta(Z),
 	X < Z,
 	XNew is X+1,
-	asserta(pos(XNew,Y)),cekGym,!.
+	asserta(pos(XNew,Y)),
+	isGym(X,YNew) -> (cekGym);(cekMusuh) ,!.
 
 cekGym:-
-	pos(X,Y),
-	isGym(X,Y),
 	write('Wah Anda telah sampai di Gym'),nl,
 	write('Bugarkan kembali para Tokemon Anda, dengan command: heal. '),!.
 
-/*
 cekMusuh :-
-	/*
 	generateEncounter(Hasil),
-	Hasil == ada/gaada
-	ada -->
-		write('run/fight'),
-		run -->
-			generatePeluangRun(Hasil2),
-			Hasil2 == berhasil/gagal,
-			berhasil --> balik ke sebelumnya
-			write(gagal),
-			fight
-		fight --> generateMusuh,!.
-	gaada --> balik,!.
-	*/
-*/
+	Hasil = ada -> (write('A wild tokemon appears... fight or run?'), nl);
+	(write('Tidak ada tokemon, lanjutkan perjalanan...'),nl,! ),!.
+
+run :- 
+	generatePeluangRun(Hasil2),
+		Hasil2 = berhasil(
+			write('You successfully escape the tokemon, continue the journey!'), nl, !
+		);(
+			write('You fail to escape the tokemon... Prepare for the battle!!'), nl,
+			generateMusuh, !
+		).
+
+fight :-
+	write('You choose to fight, may the force be with you!'), nl,
+	generateMusuh, !.
+
+
 
 %cek status
 
@@ -209,38 +211,32 @@ status :-
 	write('You are currently in coordinate '), write(X), write(','), write(Y), nl,
 
 	cekBanyakTokemon(Banyak), cekBanyakLegendaryTokemon(BanyakLegendary),
-	write('You have acquired '), write(Banyak), write(' tokemons!!'), nl, N is 1,
+	write('You have acquired '), write(Banyak), write(' tokemons!!'), nl,
 	write('...dengan '), write(BanyakLegendary), write(' di antaranya adalah legendary! WOW!'), nl,
 	forall(inventory(Tokemon, Type, Elemental, HP, MaxHP, NamaAtk, Atk, NamaSpAtk, SpAtk, Lvl, CurExp, NeededExp), (
 
 		write('  --> '), write('Name: '), write(Tokemon), nl,
 		write('      Type: '), write(Type), nl,
 		write('      Elemental: '), write(Elemental), nl,
-		write('      Health: '), write(HP), nl,
-		write('      Max Health: '), write(MaxHP), nl,
-		write('      Nama Skill Attack: '), write(NamaAtk), nl,
-		write('      Attack: '), write(Atk), nl,
-		write('      Nama Skill Special Attack: '), write(NamaSpAtk), nl,
-		write('      Special Attack: '), write(SpAtk), nl,
-		write('      Level Tokemon: '), write(Lvl), nl,
-		write('      Current XP: '), write(CurExp), nl,
+		write('      Health: '), write(HP), write('/'), write(MaxHP), nl,
+		write('      Skill Attack [Damage]: '), write(NamaAtk), write(' ['), write(Atk), write(']'), nl,
+		write('      Skill Special Attack [Damage]: '), write(NamaSpAtk), write(' ['), write(SpAtk), write(']'), nl,
+		write('      Level: '), write(Lvl), nl,
+		write('      XP: '), write(CurExp), nl,
 		write('      XP yang dibutuhkan buat naik level: '), write(NeededExp), nl
 
 		)),
 
 	write('Here are the legendary tokemons you still have to seek...'), nl,
-	forall(musuh(Idx,Tokemon, legendary, Elemental, HP, MaxHP, NamaAtk, Atk, NamaSpAtk, SpAtk, Lvl, CurExp, NeededExp), (
+	forall(musuh(_,Tokemon, legendary, Elemental, HP, MaxHP, NamaAtk, Atk, NamaSpAtk, SpAtk, Lvl, CurExp, NeededExp), (
 
 		write('  --> '), write('Name: '), write(Tokemon), nl,
 		write('      Elemental: '), write(Elemental), nl,
-		write('      Health: '), write(HP), nl,
-		write('      Max Health: '), write(MaxHP), nl,
-		write('      Nama Skill Attack: '), write(NamaAtk), nl,
-		write('      Attack: '), write(Atk), nl,
-		write('      Nama Skill Special Attack: '), write(NamaSpAtk), nl,
-		write('      Special Attack: '), write(SpAtk), nl,
-		write('      Level Tokemon: '), write(Lvl), nl,
-		write('      Current XP: '), write(CurExp), nl,
+		write('      Health: '), write(HP), write('/'), write(MaxHP), nl,
+		write('      Skill Attack [Damage]: '), write(NamaAtk), write(' ['), write(Atk), write(']'), nl,
+		write('      Skill Special Attack [Damage]: '), write(NamaSpAtk), write(' ['), write(SpAtk), write(']'), nl,
+		write('      Level: '), write(Lvl), nl,
+		write('      XP: '), write(CurExp), nl,
 		write('      XP yang dibutuhkan buat naik level: '), write(NeededExp), nl
 
 		)).

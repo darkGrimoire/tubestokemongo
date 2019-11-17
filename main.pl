@@ -70,7 +70,7 @@ map :-
 
 
 quit :-
-    retract(gameStarted(_)),
+    %retract(gameStarted(_)),
     write('Dadah.'), nl,
     halt.
 
