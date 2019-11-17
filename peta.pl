@@ -37,50 +37,62 @@ isBorderKiri(X,_):-
 % cek apakah koordinat merupakan obstacle
 
 isObstacle(X,Y):-
+   \+isGym(X,Y),
   lebarpeta(L),
    X =:= L-3,
    Y =:= 7,!.
 isObstacle(X,Y):-
+   \+isGym(X,Y),
    lebarpeta(L),
    X =:= L-4,
    Y =:= 7,!.
 isObstacle(X,Y):-
+   \+isGym(X,Y),
    lebarpeta(L),
    X =:= L-5,
    Y =:= 7,!.
 isObstacle(X,Y):-
+   \+isGym(X,Y),
    lebarpeta(L),
    X =:= L-6,
    Y =:= 7,!.
 isObstacle(X,Y):-
+   \+isGym(X,Y),
    lebarpeta(L),
    X =:= L-6,
    Y =:= 6,!.
 isObstacle(X,Y):-
+   \+isGym(X,Y),
    lebarpeta(L),
    X =:= L-6,
    Y =:= 5,!.
 isObstacle(X,Y):-
+   \+isGym(X,Y),
    tinggipeta(T),
    Y=:=T-2,
    X =:= 6,!.
 isObstacle(X,Y):-
+   \+isGym(X,Y),
    tinggipeta(T),
    Y =:= T-2,
    X=:=4,!.
 isObstacle(X,Y):-
+   \+isGym(X,Y),
    tinggipeta(T),
    Y =:= T-2,
    X =:= 5,!.
 isObstacle(X,Y):-
+   \+isGym(X,Y),
    tinggipeta(T),
    Y =:= T-2,
    X =:= 7,!.
 isObstacle(X,Y):-
+   \+isGym(X,Y),
    tinggipeta(T),
    Y =:= T-1,
    X =:= 7,!.
 isObstacle(X,Y):-
+   \+isGym(X,Y),
    tinggipeta(T),
    Y =:= T-3,
    X =:= 7,!.
