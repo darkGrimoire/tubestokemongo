@@ -113,10 +113,6 @@ isReadytoEvolve(X) :-
 
 evolve(Tokemon) :-
     inventory(Tokemon,Jenis,Tipe,HP,MaxHP,NamaAtk,DamageAtk,NamaSp,DamageSp,Level,CurrExp,NeededExp),
-    NewMaxHP is floor(MaxHP+(MaxHP*(1.9))),
-    NewHP is floor(HP+(HP*1.9)),
-    NewDamageAtk is floor(DamageAtk+(DamageAtk*(1.5))),
-    NewDamageSp is floor(DamageSp+(DamageAtk*(1.5))),
     retract(inventory(Tokemon,Jenis,Tipe,HP,MaxHP,NamaAtk,DamageAtk,NamaSp,DamageSp,Level,CurrExp,NeededExp)),
     isEvolve(A,Jenis,Tipe,B,C,NamaAtk,D,E,F,G,H,I),
     asserta(inventory(A,Jenis,Tipe,B,C,NamaAtk,D,E,F,G,H,I)),!.
@@ -198,3 +194,9 @@ init_musuh(Banyak) :-
     BanyakBaru is Banyak-1,
     init_musuh(BanyakBaru),!.
     
+/*
+NewMaxHP is floor(MaxHP+(MaxHP*(1.9))),
+    NewHP is floor(HP+(HP*1.9)),
+    NewDamageAtk is floor(DamageAtk+(DamageAtk*(1.5))),
+    NewDamageSp is floor(DamageSp+(DamageAtk*(1.5))),
+    */
