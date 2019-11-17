@@ -84,18 +84,18 @@ battleStat :-
     \+inbattleFlag(_),!.
 
 battleStat :-
-    print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+    print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'),
     inbattleFlag(_),
     curMusuh(EnemyTokemon,_,EnemyElmt,EnemyHP,EnemyMaxHP,_,_,_,_,_,_,_),
     write('%                    Enemy                        %'),nl,
     write('%    '),write(EnemyTokemon),write('               %'),nl,
-    write('%    Health:     '), write(EnemyHP), write(' / '), write(EnemyMaxHP)write('          %'),nl,
+    write('%    Health:     '), write(EnemyHP), write(' / '), write(EnemyMaxHP),write('          %'),nl,
     write('%    Elemental:  '), write(EnemyElmt),write('               %'),nl,
     write('%                    Tokemon                      %'),nl,
     equTokemon(Tokemon,_,Elmt,HP,MaxHP,_,_,_,_,_,_,_),
-    write('%                ')write(Tokemon),write('                    %'),nl,
+    write('%                '),write(Tokemon),write('                    %'),nl,
     write('%    Health: '), write(HP), write('/'), write(MaxHP),write('             %'),nl,
-    write('%    Elemental: '), write(Elmt),write('                   %')nl,nl,
+    write('%    Elemental: '), write(Elmt),write('                   %'),nl,nl,
     battleChoice,!.
 
 battleChoice :-
