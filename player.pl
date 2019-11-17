@@ -203,27 +203,37 @@ status :-
 	pos(X,Y),
 	write('You are currently in coordinate '), write(X), write(','), write(Y), nl,
 
-	cekBanyakTokemon(Banyak),
+	cekBanyakTokemon(Banyak), cekBanyakLegendaryTokemon(BanyakLegendary)
 	write('You have acquired '), write(Banyak), write(' tokemons!!'), nl, N is 1,
-	forall(inventory(Tokemon, Type, Elemental, HP, Atk, SpAtk), (
+	write('...dengan '), write(BanyakLegendary), write(' di antaranya adalah legendary! WOW!'),
+	forall(inventory(Tokemon, Type, Elemental, HP, MaxHP, NamaAtk, Atk, NamaSpAtk, SpAtk, Lvl, CurExp, NeededExp), (
 
-		write(N), write(' --> '), write('Name: '), write(Tokemon), nl,
+		write('  --> '), write('Name: '), write(Tokemon), nl,
 		write('      Type: '), write(Type), nl,
 		write('      Elemental: '), write(Elemental), nl,
-		write('      Current HP: '), write(HP), nl,
+		write('      Health: '), write(HP), nl,
+		write('      Nama Skill Attack: '), write(NamaAtk), nl,
 		write('      Attack: '), write(Atk), nl,
-		write('      Special Attack: '), write(SpAtk), nl
+		write('      Nama Skill Special Attack: '), write(NamaSpAtk), nl,
+		write('      Special Attack: '), write(SpAtk), nl,
+		write('      Level Tokemon: '), write(Level), nl,
+		write('      Current XP: '), write(CurExp), nl,
+		write('      XP yang dibutuhkan buat naik level: ', write(NeededExp)), nl
 
 		)),
-	write('Here are the legendary tokemons you still have to seek...'), nl, N is 1,
-	forall(tokemon(Tokemon, legendary, Elemental, HP, Atk, SpAtk), (
 
-		write(N), write(' --> '), write('Name: '), write(Tokemon), nl,
-		% write('      Type: '), write(Type), nl,
+	write('Here are the legendary tokemons you still have to seek...'), nl,
+	forall(isTokemon(Tokemon, legendary, Elemental, HP, MaxHP, NamaAtk, Atk, NamaSpAtk, SpAtk, Lvl, CurExp, NeededExp), (
+
+		write('  --> '), write('Name: '), write(Tokemon), nl,
 		write('      Elemental: '), write(Elemental), nl,
-		write('      Current HP: '), write(HP), nl,
+		write('      Health: '), write(HP), nl,
+		write('      Nama Skill Attack: '), write(NamaAtk), nl,
 		write('      Attack: '), write(Atk), nl,
-		write('      Special Attack: '), write(SpAtk), nl
-
+		write('      Nama Skill Special Attack: '), write(NamaSpAtk), nl,
+		write('      Special Attack: '), write(SpAtk), nl,
+		write('      Level Tokemon: '), write(Level), nl,
+		write('      Current XP: '), write(CurExp), nl,
+		write('      XP yang dibutuhkan buat naik level: ', write(NeededExp)), nl
 
 		)).
