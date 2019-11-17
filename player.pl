@@ -82,7 +82,7 @@ heal :-
 	pos(X,Y), isGym(A,B), X =:= A, Y =:= B, \+alreadyHeal(_),
 	forall(inventory(Tokemon, Type, Elemental, _, MaxHP, NamaAtk, Atk, NamaSpAtk, SpAtk, Lvl, CurExp, NeededExp), (
 
-		retract(inventory(Tokemon, _, _, _, _, _)),
+		retract(inventory(Tokemon, _, _, _, _, _,_,_,_,_,_,_)),
 		asserta(inventory(Tokemon, Type, Elemental, MaxHP, MaxHP, NamaAtk, Atk, NamaSpAtk, SpAtk, Lvl, CurExp, NeededExp))
 
 		)),
