@@ -87,22 +87,21 @@ heal :-
 s:-
 	pos(X,Y),
 	YNew is Y+1,
-	isObstacle(X,YNew),
+	isObstacle(X,YNew),map,
 	write('Perjalan Anda terhalang oleh tembok besar!'),nl,
 	write('Anda harus putar balik dan cari jalan yang lebih aman!'),nl,!.
 s :-
 	pos(_,Y),
 	tinggipeta(Z),
-	Y =:= Z, 
+	Y =:= Z, map,
 	write('Wahhh Anda sudah berkeliling sampai ke penjuru selatan dunia!!'), nl,
 	write('Anda perlu berbalik dan mencari Tokemon di penjuru dunia lain!!'),!.
-
 s :-
 	retract(pos(X,Y)),
 	tinggipeta(Z),
 	Y < Z,
 	YNew is Y+1,
-	asserta(pos(X,YNew)),
+	asserta(pos(X,YNew)),map,
 	ceks,!.
 
 ceks:-
@@ -113,13 +112,13 @@ ceks:-
 w:-
 	pos(X,Y),
 	YNew is Y - 1,
-	isObstacle(X,YNew),
+	isObstacle(X,YNew),map,
 	write('Perjalan Anda terhalang oleh tembok besar!'),nl,
 	write('Anda harus putar balik dan cari jalan yang lebih aman!'),nl,!.
 
 w :-
 	pos(_,Y),
-	Y =:= 1, 
+	Y =:= 1,map, 
 	write('Wahhh Anda sudah berkeliling sampai ke penjuru utara dunia!!'), nl,
 	write('Anda perlu berbalik dan mencari Tokemon di penjuru dunia lain!!'),!.
 
@@ -127,7 +126,7 @@ w :-
 	retract(pos(X,Y)),
 	Y > 1,
 	YNew is Y-1,
-	asserta(pos(X,YNew)),
+	asserta(pos(X,YNew)),map,
 	cekw,!.
 cekw:-
 	pos(X,Y),
@@ -137,12 +136,12 @@ cekw:-
 a:-
 	pos(X,Y),
 	XNew is X-1,
-	isObstacle(XNew,Y),
+	isObstacle(XNew,Y),map,
 	write('Perjalan Anda terhalang oleh tembok besar!'),nl,
 	write('Anda harus putar balik dan cari jalan yang lebih aman!'),nl,!.
 a :-
 	pos(X,_),
-	X =:= 1, 
+	X =:= 1,map, 
 	write('Wahhh Anda sudah berkeliling sampai ke ujung barat dunia!!'), nl,
 	write('Anda perlu berbalik dan mencari Tokemon di penjuru dunia lain!!'),!.
 
@@ -150,7 +149,7 @@ a :-
 	retract(pos(X,Y)),
 	X > 1,
 	XNew is X-1,
-	asserta(pos(XNew,Y)),ceka,!.
+	asserta(pos(XNew,Y)),map,ceka,!.
 ceka:-
 	pos(X,Y),
 	isGym(X,Y),
@@ -160,14 +159,14 @@ ceka:-
 d:-
 	pos(X,Y),
 	XNew is X+1,
-	isObstacle(XNew,Y),
+	isObstacle(XNew,Y),map,
 	write('Perjalan Anda terhalang oleh tembok besar!'),nl,
 	write('Anda harus putar balik dan cari jalan yang lebih aman!'),nl,!.
 
 d :-
 	pos(X,_),
 	lebarpeta(Z),
-	X =:= Z, 	
+	X =:= Z,map, 	
 	write('Wahhh Anda sudah berkeliling sampai ke ujung timur dunia!!'), nl,
 	write('Anda perlu berbalik dan mencari Tokemon di penjuru dunia lain!!'),!.
 d :-
@@ -175,7 +174,7 @@ d :-
 	lebarpeta(Z),
 	X < Z,
 	XNew is X+1,
-	asserta(pos(XNew,Y)),cekd,!.
+	asserta(pos(XNew,Y)),map,cekd,!.
 cekd:-
 	pos(X,Y),
 	isGym(X,Y),
