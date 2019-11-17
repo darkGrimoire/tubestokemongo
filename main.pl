@@ -62,6 +62,7 @@ help :-
     write('map.     : memperlihatkan peta'),nl,
     write('status.  : memperlihatkan inventorymu dan objectivesmu'),nl,
     write('help.    : nampilin ini ehe]'),nl,
+    write('load(F)  : memuat permainan dari file bernama F'),nl,
     write('w.       : gerak 1 petak ke utara'),nl,
     write('s.       : gerak 1 petak ke selatan'),nl,
     write('d.       : gerak 1 petak ke timur'),nl,
