@@ -77,7 +77,6 @@ heal :-
 	pos(X,Y), isGym(A,B), X =:= A, Y =:= B, alreadyHeal(_),
 	write('You already heal the tokemons, cannot do it again :('), nl,!.
 
-
 heal :-
 	pos(X,Y), isGym(A,B), X =:= A, Y =:= B, \+alreadyHeal(_),
 	forall(inventory(Tokemon, Type, Elemental, _, MaxHP, NamaAtk, Atk, NamaSpAtk, SpAtk, Lvl, CurExp, NeededExp), (
@@ -93,6 +92,13 @@ heal :-
 
 
 %jalan
+
+s :-
+	inbattleFlag(_), write('You can\'t move during battle'),nl,!.
+
+s :-
+	pbattleFlag(_), write('You can\'t move during battle'),nl,!.
+
 s:-
 	pos(X,Y),
 	YNew is Y+1,
@@ -112,6 +118,12 @@ s :-
 	YNew is Y+1,
 	asserta(pos(X,YNew)), map,
 	isGym(X,YNew) -> (cekGym);(cekMusuh) ,!.
+
+w :-
+	inbattleFlag(_), write('You can\'t move during battle'),nl,!.
+
+w :-
+	pbattleFlag(_), write('You can\'t move during battle'),nl,!.
 
 w:-
 	pos(X,Y),
@@ -133,6 +145,12 @@ w :-
 	asserta(pos(X,YNew)), map,
 	isGym(X,YNew) -> (cekGym);(cekMusuh) ,!.
 
+a :-
+	inbattleFlag(_), write('You can\'t move during battle'),nl, !.
+
+a :-
+	pbattleFlag(_), write('You can\'t move during battle'),nl,!.
+
 a:-
 	pos(X,Y),
 	XNew is X-1,
@@ -152,6 +170,12 @@ a :-
 	XNew is X-1,
 	asserta(pos(XNew,Y)), map,
 	isGym(XNew,Y) -> (cekGym);(cekMusuh) ,!.
+
+d :-
+	inbattleFlag(_), write('You can\'t move during battle'),nl,!.
+
+d :-
+	pbattleFlag(_), write('You can\'t move during battle'),nl,!.
 
 d:-
 	pos(X,Y),
@@ -184,6 +208,16 @@ cekMusuh :-
 	Hasil = ada -> (write('A wild tokemon appears... fight or run?'), nl);
 	(write('Tidak ada tokemon, lanjutkan perjalanan...'),nl,! ),!.
 
+run :-
+	inbattleFlag(_), 
+	write('Kamu tidak bisa kabur saat battle, tetap semangat hari masih panjang!'), nl,
+	!.
+
+run :-
+	pbattleFlag(_),
+	write('You are otw battle, can\'t run'), nl,
+	!.
+
 run :- 
 	generatePeluangRun(Hasil2),
 		Hasil2 = berhasil(
@@ -192,6 +226,16 @@ run :-
 			write('You fail to escape the tokemon... Prepare for the battle!!'), nl,
 			generateMusuh, !
 		).
+
+fight :-
+	inbattleFlag(_),
+	write('You are currently on a battle'), nl,
+	!.
+
+fight :-
+	pbattleFlag(_),
+	write('You are otw battle, sabar'), nl,
+	!.
 
 fight :-
 	write('You choose to fight, may the force be with you!'), nl,
