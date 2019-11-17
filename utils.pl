@@ -36,5 +36,6 @@ assertaList([X|L]) :-
 
 /* utils->printList(List). */
 printList([]) :- !.
+printList([H|[]]) :- write(H), printList([]),!.
 printList([H|Tail]) :-
-	write(H), printList(Tail),!.
+	write(H),write(','), printList(Tail),!.
