@@ -89,12 +89,12 @@ printMap(X,Y):-
  	isBorderBawah(X,Y),!,write('X').
 printMap(X,Y):-
  	isBorderAtas(X,Y),!, write('X').
-printMap(X,Y):-
-   isObstacle(X,Y),!,write('X').
  printMap(X,Y):-
     pos(X,Y),!, write('P').
 printMap(X,Y):-
     isGym(X,Y),!, write('G').
+printMap(X,Y):-
+      isObstacle(X,Y),!,write('X').
 printMap(_,_):-
     write('-').
 printprio(X,Y):-

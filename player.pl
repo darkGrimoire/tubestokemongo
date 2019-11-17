@@ -41,7 +41,8 @@ addTokemon(Tokemon, Type, Elemental, HP, Atk, SpAtk) :-
 
 drop(X) :-
 	\+inventory(X,_,_,_,_,_),
-	write('You do not have tokemon '), write(X), nl.
+	write('You do not have tokemon '), write(X), nl,
+	write('Mari kita cari Tokemon tersebut dan lawan  tokemon - tokemon lain!!'), nl.
 
 drop(X) :-
 	retract(inventory(X,_,_,_,_,_)),
@@ -52,15 +53,17 @@ drop(X) :-
 
 heal :-
 	pos(X,_), isGym(A,_), X \== A,
-	write('You are not in the gym, cannot heal'), nl, !.
+	write('You are not in the gym, Butuh beberapa langkah lagi untuk menuju gym'), nl,
+	write('Pergi ke gym, kasih suntikan energy untuk tokemon - tokemonmu'),nl,!.
 
 heal :-
 	pos(_,Y), isGym(_,B), Y \== B,
-	write('You are not in the gym, cannot heal'), nl, !.
+	write('You are not in the gym, Butuh beberapa langkah lagi untuk menuju gym'), nl,
+	write('Pergi ke gym, kasih suntikan energy untuk tokemon - tokemonmu'),nl,!.
 
 heal :-
 	pos(X,Y), isGym(A,B), X =:= A, Y =:= B, alreadyHeal(_),
-	write('You already heal the tokemons, cannot do it again :('), nl, !.
+	write('You already heal the tokemons, cannot do it again :('), nl,!.
 
 
 heal :-
@@ -74,60 +77,91 @@ heal :-
 		)),
 
 	write('Semua tokemon sudah di-heal!!! yey :D '), nl,
+	write('Sekarang Tokemon Anda, dalam kondisi terbaik dan siap untuk memburu Tokemon Legendary'), nl, !.
 	asserta(alreadyHeal(sudah)), !.
 
 
 %jalan
 
 %gabisa jalan ke atas
-w :-
+s :-
 	pos(_,Y),
 	tinggipeta(Z),
 	Y =:= Z, 
-	write('Jalan anda menuju utara terhalang tembok besar!!'), nl, !.
+	write('Wahhh Anda sudah berkeliling sampai ke penjuru selatan dunia!!'), nl,
+	write('Anda perlu berbalik dan mencari Tokemon di penjuru dunia lain!!'),!.
 
 %bisa jalan ke atas
-w :-
+s:-
+	pos(X,Y),
+	isObstacle(A,B),
+	Y =:= B,
+	X =:= A,
+	write('Perjalan Anda terhalang oleh tembok besar!'),nl,
+	write('Anda harus putar balik dan cari jalan yang lebih aman!'),nl,!.
+s :-
 	retract(pos(X,Y)),
 	tinggipeta(Z),
 	Y < Z,
 	YNew is Y+1,
 	asserta(pos(X,YNew)),!.
 
-s :-
+w :-
 	pos(_,Y),
 	Y =:= 1, 
-	write('Jalan anda menuju selatan terhalang tembok besar!!'), nl, !.
+	write('Wahhh Anda sudah berkeliling sampai ke penjuru utara dunia!!'), nl,
+	write('Anda perlu berbalik dan mencari Tokemon di penjuru dunia lain!!'),!.
 
-s :-
+w :-
 	retract(pos(X,Y)),
 	Y > 1,
 	YNew is Y-1,
 	asserta(pos(X,YNew)),!.
-
+w:-
+	pos(X,Y),
+	isObstacle(A,B),
+	Y =:= B,
+	X =:= A,
+	write('Perjalan Anda terhalang oleh tembok besar!'),nl,
+	write('Anda harus putar balik dan cari jalan yang lebih aman!'),nl,!.
 a :-
 	pos(X,_),
 	X =:= 1, 
-	write('Jalan anda menuju barat terhalang tembok besar!!'), nl, !.
+	write('Wahhh Anda sudah berkeliling sampai ke ujung barat dunia!!'), nl,
+	write('Anda perlu berbalik dan mencari Tokemon di penjuru dunia lain!!'),!.
 
 a :-
 	retract(pos(X,Y)),
 	X > 1,
 	XNew is X-1,
 	asserta(pos(XNew,Y)),!.
+a:-
+	pos(X,Y),
+	isObstacle(A,B),
+	Y =:= B,
+	X =:= A,
+	write('Perjalan Anda terhalang oleh tembok besar!'),nl,
+	write('Anda harus putar balik dan cari jalan yang lebih aman!'),nl,!.
 
 d :-
 	pos(X,_),
 	lebarpeta(Z),
-	X =:= Z, 
-	write('Jalan anda menuju timur terhalang tembok besar!!'), nl, !.
-
+	X =:= Z, 	
+	write('Wahhh Anda sudah berkeliling sampai ke ujung timur dunia!!'), nl,
+	write('Anda perlu berbalik dan mencari Tokemon di penjuru dunia lain!!'),!.
 d :-
 	retract(pos(X,Y)),
 	lebarpeta(Z),
 	X < Z,
 	XNew is X+1,
 	asserta(pos(XNew,Y)),!.
+d:-
+	pos(X,Y),
+	isObstacle(A,B),
+	Y =:= B,
+	X =:= A,
+	write('Perjalan Anda terhalang oleh tembok besar!'),nl,
+	write('Anda harus putar balik dan cari jalan yang lebih aman!'),nl,!.
 
 
 

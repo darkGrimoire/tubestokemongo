@@ -11,6 +11,7 @@
 :- include('player.pl').
 :- include('utils.pl').
 :- include('ExternalFile.pl').
+:- include('tokemon.pl').
 /*-----------------------------------------*/
 
 start :-
