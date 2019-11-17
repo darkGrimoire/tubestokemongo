@@ -644,6 +644,16 @@ cekLegendaryObj :-
     write('Check your status to see their name\'s.'),nl,nl,
     !.
 
+cekLegendaryObj :-
+    winbattleFlag(_),
+    findall(X, (musuh(_,X,Type,_,_,_,_,_,_,_,_,_,_), Type == legendary), LegendaryList),
+    length(LegendaryList, Len),
+    Len =:= 0,
+    write('You have found all legendary tokemons!!'),nl,
+    write('Congratulations.. work so hard forget how to vacations..'),nl,nl,
+    retract(curMusuh(_,_,_,_,_,_,_,_,_,_,_,_)), retract(winbattleFlag(_)), asserta(wingameFlag(_)),
+    youWin,!.
+
 
 loseBattle :-
     \+losebattleFlag(_),!.
