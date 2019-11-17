@@ -43,7 +43,7 @@ isTokemon(kumon,legendary,fire,12345,12345,english,1234,math,2345,1,0,10000).
 isTokemon(doraemon,legendary,leaves,9500,9500,baling_bambu,3000,time_machine,5000,1,0,10000).
 
 /*inisialisasi tokemon legend terkuat*/
-isSuperLegend(daemon,superlegendary,hmif,135182,konsekuensi,2000,pencoretan,4000,1,0,10000). 
+isTokemon(daemon,superlegendary,hmif,135182,konsekuensi,2000,pencoretan,4000,1,0,10000). 
 
 /*inisialisasi bentuk evolving dari semua tokemon*/
 isEvolve(singamon,normal,water,HP,50000,cakarsaja,A,cakarbangetbanget,SA,0,-1,0) :-
