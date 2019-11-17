@@ -1,4 +1,3 @@
-:- include('peta.pl').
 :- dynamic(pos/2).
 :- dynamic(maxTokemon/1).
 :- dynamic(tokemon/6).

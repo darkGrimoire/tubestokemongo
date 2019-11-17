@@ -27,6 +27,7 @@ searchIdx([_|LTail],Pos,C) :-
 % appendList(e, List, ListResult)
 appendList(X,L,[X|L]).
 
+%assert facts from a list
 assertaList([]) :- !.
 
 assertaList([X|L]) :-
