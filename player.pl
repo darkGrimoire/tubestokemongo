@@ -42,14 +42,21 @@ addTokemon(Tokemon, Type, Elemental, HP, Atk, SpAtk) :-
 %kalau mau drop pokemon
 
 drop(X) :-
+	\+winbattleFlag(_),
 	\+inventory(X,_,_,_,_,_),
 	write('You do not have tokemon '), write(X), nl,
 	write('Mari kita cari Tokemon tersebut dan lawan  tokemon - tokemon lain!!'), nl.
 
 drop(X) :-
+	\+winbattleFlag(_),
 	retract(inventory(X,_,_,_,_,_)),
 	write('You have dropped tokemon '), write(X), nl.
 
+drop(X) :-
+	winbattleFlag(_),
+	retract(inventory(X,_,_,_,_,_)),
+	write('You have dropped tokemon '), write(X), nl,
+	capture,!.
 
 %kalau mau heal tokemon
 
