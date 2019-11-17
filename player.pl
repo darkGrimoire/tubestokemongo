@@ -203,8 +203,8 @@ status :-
 	pos(X,Y),
 	write('You are currently in coordinate '), write(X), write(','), write(Y), nl,
 
-	cekBanyakTokemon(Banyak), cekBanyakLegendaryTokemon(BanyakLegendary)
-	write('You have acquired '), write(Banyak), write(' tokemons!!'), nl, N is 1,
+	cekBanyakTokemon(Banyak), cekBanyakLegendaryTokemon(BanyakLegendary),
+	write('You have acquired '), write(Banyak), write(' tokemons!!'), nl,
 	write('...dengan '), write(BanyakLegendary), write(' di antaranya adalah legendary! WOW!'),
 	forall(inventory(Tokemon, Type, Elemental, HP, MaxHP, NamaAtk, Atk, NamaSpAtk, SpAtk, Lvl, CurExp, NeededExp), (
 
