@@ -7,32 +7,35 @@ init_map :-
     random(10,20,X),
     random(10,20,Y),
     asserta(lebarpeta(X)),asserta(tinggipeta(Y)),!,
-    TMax is Y+1,
     LMax is X+1,
-    random(1,TMax,A),
-    random(1,LMax,B),
+    TMax is Y+1,
+    random(1,LMax,A),
+    random(1,TMax,B),
     asserta(isGym(A,B)).
 
+% cek apakah koordinat sudah di border 
 
-
-    isBorderBawah(_,Y):-
+isBorderBawah(_,Y):-
       tinggipeta(T),
       Ymax is T+1,
       Y =:= Ymax,
       !.
-   isBorderAtas(_,Y):-
+isBorderAtas(_,Y):-
       Y =:= 0,
       !.
   
-   isBorderKanan(X,_):-
+isBorderKanan(X,_):-
       lebarpeta(T),
       Xmax is T+1,
       X =:= Xmax,
       !.
   
-   isBorderKiri(X,_):-
+isBorderKiri(X,_):-
       X =:= 0,
       !.
+
+% cek apakah koordinat merupakan obstacle
+
 isObstacle(X,Y):-
   lebarpeta(L),
    X =:= L-3,
@@ -82,6 +85,8 @@ isObstacle(X,Y):-
    Y =:= T-3,
    X =:= 7,!.
 
+% cetak peta berdasarkan koordinat
+
 printMap(X,Y):-
  	isBorderKiri(X,Y),!, write('X').
 printMap(X,Y):-
@@ -91,11 +96,11 @@ printMap(X,Y):-
 printMap(X,Y):-
  	isBorderAtas(X,Y),!, write('X').
 printMap(X,Y):-
-   isObstacle(X,Y),!,write('X').
- printMap(X,Y):-
     pos(X,Y),!, write('P').
 printMap(X,Y):-
     isGym(X,Y),!, write('G').
+printMap(X,Y):-
+    isObstacle(X,Y),!,write('X').
 printMap(_,_):-
     write('-').
 printprio(X,Y):-
