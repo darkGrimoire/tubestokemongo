@@ -65,7 +65,7 @@ init_map :-
  printMap(X,Y):-
     isGym(X,Y),!, write('G').
  printMap(_,_):-
-    write(' ').
+    write('-').
  printprio(X,Y):-
     isBorderKanan(X,Y),!, write('X').
  printprio(X,Y):-

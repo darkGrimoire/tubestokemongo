@@ -65,3 +65,8 @@ map :-
     write('G    :    Gym'), nl,
 !.
 
+quit :-
+    retract(gameStarted(_)),
+    halt.
+
+
