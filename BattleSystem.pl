@@ -18,6 +18,7 @@
 :- dynamic(winbattleFlag/1).
 :- dynamic(losebattleFlag/1).
 :- dynamic(gameoverFlag/1).
+:- dynamic(wingameFlag/1).
 
 /* For debugging purpose */
 debugBiasa :- write('a wild hewwo appears!'),nl,
