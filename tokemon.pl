@@ -10,7 +10,7 @@
 %     random(4700,5000,HP),
 %     random(500,600,A),
 %     random(700,800,SA).
-isTokemon(kudamon,normal,water,HP,HP,ikikikiki,A,tendangan_maut,SA,1,0,1000) :-
+isTokemon(kudamon,normal,water,HP,HP,ikikikiki,A,tendanganmaut,SA,1,0,1000) :-
     random(4700,5000,HP),
     random(500,600,A),
     random(700,800,SA).
@@ -18,7 +18,7 @@ isTokemon(defrog,normal,water,HP,HP,kwok,A,frogyou,SA,1,0,1000) :-
     random(4700,5000,HP),
     random(500,600,A),
     random(700,800,SA).
-isTokemon(lotusmon,normal,water,HP,HP,splash,A,tenggelamkan,SA,1,0,1000) :-
+isTokemon(lotusmon,normal,water,HP,HP,splash,A,tenggelam,SA,1,0,1000) :-
     random(4700,5000,HP),
     random(500,600,A),
     random(700,800,SA).
@@ -40,14 +40,20 @@ isTokemon(birdmon,normal,leaves,HP,HP,cuitcuit,A,ciutciut,SA,1,0,1000) :-
     random(4000,4200,HP),
     random(650,750,A),
     random(850,950,SA).
-isTokemon(tikusmon,normal,leaves,HP,HP,puptikus,A,gigit_nih,SA,1,0,1000) :-
+isTokemon(tikusmon,normal,leaves,HP,HP,puptikus,A,gigitnih,SA,1,0,1000) :-
     random(4000,4200,HP),
     random(650,750,A),
     random(850,950,SA).
-% isTokemon(salamander,normal,leaves,HP,HP,lick,A,poison,SA,1,0,1000) :-
-
+isTokemon(salamander,normal,leaves,HP,HP,lick,A,poison,SA,1,0,1000) :-
+    random(4000,4200,HP),
+    random(650,750,A),
+    random(850,950,SA).
     
 isTokemon(kodingmon,normal,hmif,HP,HP,sublime,A,vscode,SA,1,0,1000) :-
+    random(4700,5000,HP),
+    random(500,600,A),
+    random(700,800,SA).
+isTokemon(alstrukdat,normal,hmif,HP,HP,praprak,A,duartubes,SA,1,0,1000) :-
     random(4700,5000,HP),
     random(500,600,A),
     random(700,800,SA).
@@ -55,7 +61,15 @@ isTokemon(nyetrumon,normal,hme,HP,HP,kapasitor,A,induktor,SA,1,0,1000) :-
     random(4700,5000,HP),
     random(500,600,A),
     random(700,800,SA).
+isTokemon(powermon,normal,hme,HP,HP,kekuatan,A,lightning,SA,1,0,1000) :-
+    random(4700,5000,HP),
+    random(500,600,A),
+    random(700,800,SA).
 isTokemon(radarmon,normal,signum,HP,HP,laprak,A,radiasi,SA,1,0,1000) :-
+    random(4700,5000,HP),
+    random(500,600,A),
+    random(700,800,SA).
+isTokemon(signalmon,normal,signum,HP,HP,nosignal,A,airplanemode,SA,1,0,1000) :-
     random(4700,5000,HP),
     random(500,600,A),
     random(700,800,SA).
@@ -69,44 +83,68 @@ isTokemon(daemon,superlegendary,hmif,135182,135182,konsekuensi,2000,pencoretan,4
 
 /*inisialisasi bentuk evolving dari semua tokemon*/
 isEvolve(singamon,normal,water,HP,HP,cakaraja,A,cakarbangetbanget,SA,0,-1,0) :-
-    random(47000,50000,HP),
-    random(5000,6000,A),
-    random(7000,8000,SA).
+    random(49000,50000,HP),
+    random(5900,6000,A),
+    random(7900,8000,SA).
 isEvolve(dedefrog,normal,water,HP,HP,kwok,A,froggingsheet,SA,0,-1,0) :-
-    random(47000,50000,HP),
-    random(5000,6000,A),
-    random(7000,8000,SA).
-isEvolve(anjijingmon,normal,fire,HP,HP,gukguk,A,anjingsiamaneh,SA,0,-1,0) :-
-    random(45000,48000,HP),
-    random(5500,6500,A),
-    random(7000,8000,SA).
-isEvolve(nagagamon,normal,fire,HP,HP,sembursaja,A,duarR,SA,0,-1,0) :-
-    random(45000,48000,HP),
-    random(5500,6500,A),
-    random(7000,8000,SA).
-isEvolve(bibirdmon,normal,leaves,HP,HP,cuitcuit,A,ciutciuttt,SA,0,-1,0) :-
+    random(49000,50000,HP),
+    random(5900,6000,A),
+    random(7900,8000,SA).
+isEvolve(lotusmon,normal,water,HP,HP,splash,A,tenggelamkan,SA,0,-1,0) :-
+    random(49000,50000,HP),
+    random(5900,6000,A),
+    random(7900,8000,SA).
+isEvolve(anjinggmon,normal,fire,HP,HP,gukguk,A,anjingsiamaneh,SA,0,-1,0) :-
+    random(47000,48000,HP),
+    random(6400,6500,A),
+    random(7900,8000,SA).
+isEvolve(dragomon,normal,fire,HP,HP,sembursaja,A,duarR,SA,0,-1,0) :-
+    random(47000,48000,HP),
+    random(6400,6500,A),
+    random(7900,8000,SA).
+isEvolve(mashedpotatomon,normal,fire,HP,HP,potatopunch,A,mashedpotato,SA,0,-1,0) :-
+    random(47000,48000,HP),
+    random(6400,6500,A),
+    random(7900,8000,SA).
+isEvolve(burungmon,normal,leaves,HP,HP,cuitcuit,A,ciutciuttt,SA,0,-1,0) :-
     random(40000,42000,HP),
-    random(6500,7500,A),
-    random(8500,9500,SA).
-isEvolve(tikukusmon,normal,leaves,HP,HP,puptikus,A,gigitnih,SA,0,-1,0) :-
+    random(7400,7500,A),
+    random(9400,9500,SA).
+isEvolve(ratatouille,normal,leaves,HP,HP,puptikus,A,firecook,SA,0,-1,0) :-
     random(40000,42000,HP),
-    random(6500,7500,A),
-    random(8500,9500,SA).
-isEvolve(kodidingmon,normal,hmif,HP,HP,sublime,A,vscode,SA,0,-1,0) :-
+    random(7400,7500,A),
+    random(9400,9500,SA).
+isEvolve(salamander,normal,leaves,HP,HP,lick,A,poison,SA,0,-1,0) :-
+    random(40000,42000,HP),
+    random(7400,7500,A),
+    random(9400,9500,SA).
+isEvolve(tubesmon,normal,hmif,HP,HP,sublime,A,vscode,SA,0,-1,0) :-
     random(47000,50000,HP),
-    random(5000,6000,A),
-    random(7000,8000,SA).
-isEvolve(nyetrurumon,normal,hme,HP,HP,kapasitor,A,induktor,SA,0,-1,0) :-
+    random(5900,6000,A),
+    random(7900,8000,SA).
+isEvolve(orkom,normal,hmif,HP,HP,praprak,A,ekusUpUROsHION,SA,0,-1,0) :-
+    random(4700,5000,HP),
+    random(500,600,A),
+    random(700,800,SA).
+isEvolve(lightingmon,normal,hme,HP,HP,kapasitor,A,induktor,SA,0,-1,0) :-
     random(47000,50000,HP),
-    random(5000,6000,A),
-    random(7000,8000,SA).
-isEvolve(radarawrmon,normal,signum,HP,HP,laprak,A,radiasi,SA,0,-1,0) :-
+    random(5900,6000,A),
+    random(7900,8000,SA).
+isEvolve(himapow,normal,hme,HP,HP,kekuatan,A,matilampu,SA,1,0,0) :-
+    random(4700,5000,HP),
+    random(500,600,A),
+    random(700,800,SA).
+isEvolve(radiasimon,normal,signum,HP,HP,laprak,A,radiasi,SA,0,-1,0) :-
     random(47000,50000,HP),
-    random(5000,6000,A),
-    random(7000,8000,SA).
-isEvolve(gararamon,legendary,water,210200,210200,salt,1200,saltbae,2000,0,-1,0). 
+    random(5900,6000,A),
+    random(7900,8000,SA).
+isEvolve(signalmon,normal,signum,HP,HP,nosignal,A,airplanemode,SA,0,-1,0) :-
+    random(47000,50000,HP),
+    random(5900,6000,A),
+    random(7900,8000,SA).
+isEvolve(micinmon,legendary,water,210200,210200,salt,1200,saltbae,2000,0,-1,0). 
 isEvolve(kukumon,legendary,fire,123456,123456,english,1234,math,2345,0,-1,0).
-isEvolve(doraraemon,legendary,leaves,95000,95000,baling_bambu,3000,time_machine,5000,0,-1,0).
+isEvolve(dorayaki,legendary,leaves,95000,95000,balingbambu,3000,timemachine,5000,0,-1,0).
 
 /*fungsi2 lain*/
 apakahBisaLevelUp(Bisa) :-
@@ -143,6 +181,8 @@ evolve(Tokemon) :-
     inventory(Tokemon,Jenis,Tipe,HP,MaxHP,NamaAtk,DamageAtk,NamaSp,DamageSp,Level,CurrExp,NeededExp),
     retract(inventory(Tokemon,Jenis,Tipe,HP,MaxHP,NamaAtk,DamageAtk,NamaSp,DamageSp,Level,CurrExp,NeededExp)),
     isEvolve(A,Jenis,Tipe,B,C,NamaAtk,D,E,F,G,H,I),
+    write('Congratzszszs!!! Your '), write(Tokemon), write(' is now evolving into something new... '), nl,
+    write(A), write(!), nl,
     asserta(inventory(A,Jenis,Tipe,B,C,NamaAtk,D,E,F,G,H,I)),!.
 
 evolve(Tokemon) :-
@@ -154,6 +194,8 @@ evolve(Tokemon) :-
     retract(inventory(Tokemon,Jenis,Tipe,HP,MaxHP,NamaAtk,DamageAtk,NamaSp,DamageSp,Level,CurrExp,NeededExp)),
     isEvolve(A,Jenis,Tipe,B,C,NamaAtk,D,E,F,G,H,I),
     asserta(daemonFlag(1)),
+    write('Congratzszszs!!! Your '), write(Tokemon), write(' is now evolving into something new... '), nl,
+    write(A), write(!), nl,nl,
     write('Shortly after you evolved, the ground crumbles...'),nl,
     write('The Daemon unleashed as it smells your scent of power...'),nl,
     write('Will you be able to defeat it?'),nl,nl,
