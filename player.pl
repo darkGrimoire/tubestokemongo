@@ -11,10 +11,10 @@
 %inisialisasi fakta player, masukin ke init_player
 
 init_player :-
-	random(4700,5000,HP),
+	% random(4700,5000,HP),
     random(500,600,A),
     random(700,800,SA),
-    asserta(inventory(catamon,normal,water,HP,5000,cakar_aja,A,cakar_banget,SA,1,0,1000)),
+    asserta(inventory(catamon,normal,water,5000,5000,cakarAja,A,cakarBanget,SA,1,0,1000)),
 	asserta(maxTokemon(6)),
     tinggipeta(Height), lebarpeta(Width),
     H is Height+1, W is Width+1,
@@ -235,6 +235,7 @@ run :-
 	\+daemonFlag(_),
 	generatePeluangRun(Hasil2),
 		Hasil2 == berhasil -> (
+			retract(probbattleFlag(_)),
 			write('You successfully escape the tokemon, continue the journey!'), nl, !
 		);(
 			\+daemonFlag(_),

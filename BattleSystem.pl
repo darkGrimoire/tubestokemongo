@@ -44,9 +44,17 @@ debugDaemon :-
 /* Pre-Battle */
 init_battle :-
     \+daemonFlag(_),
-    curMusuh(Enemy,_,_,_,_,_,_,_,_,_,_,_),
+    curMusuh(Enemy,Type,EnemyElmt,EnemyHP,EnemyMaxHP,EnemyNameAttack,EnemyAttack,EnemyNameSpAttack,EnemySpAttack,EnemyLevel,EnemyCurEXP,EnemyNeededEXP),
     retract(probbattleFlag(_)), asserta(pbattleFlag(1)), asserta(spEnemyAvailable(1)),
     write('a wild '), write(Enemy), write(' appears!'),nl,
+    write('+ + + - - - E N E M Y   I N F O - - - + + +'),nl,
+    write('  --> '), write('Name: '), write(Enemy), write('[Lv. '),write(EnemyLevel),write(']'),nl,
+    write('      Type: '), write(Type), nl,
+    write('      Elemental: '), write(EnemyElmt), nl,
+    write('      Health: '), write(EnemyHP), write('/'), write(EnemyMaxHP), nl,
+    write('      Skill Attack [Damage]: '), write(EnemyNameAttack), write(' ['), write(EnemyAttack), write(']'), nl,
+    write('      Skill Special Attack [Damage]: '), write(EnemyNameSpAttack), write(' ['), write(EnemySpAttack), write(']'), nl,
+    write('+ + + - - - + + + - - - - + + + - - - + + +'),nl,
     dispTokemon,!.
 
 init_battle :-
