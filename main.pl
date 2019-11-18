@@ -12,7 +12,7 @@
 :- include('utils.pl').
 :- include('ExternalFile.pl').
 :- include('BattleSystem.pl').
-:- include('tokemon.pl').
+%:- include('tokemon.pl').
 /*-----------------------------------------*/
 
 start :-
@@ -105,26 +105,23 @@ write('     ______                        ____                 '),nl,
 write('    / ____/___ _____ ___  ___     / __ \\_   _____  _____'),nl,
 write('   / / __/ __ `/ __ `__ \\/ _ \\   / / / / | / / _ \\/ ___/'),nl,
 write('  / /_/ / /_/ / / / / / /  __/  / /_/ /| |/ /  __/ /    '),nl,
-write('  \\____/\\__,_/_/ /_/ /_/\\___/   \\____/ |___/\\___/_/     '),nl,nl.
+write('  \\____/\\__,_/_/ /_/ /_/\\___/   \\____/ |___/\\___/_/     '),nl,nl,
 
-gameOver :-
 write('      ___              __         __                       __________  ____  ____________  '),nl,
 write('     /   |  ____  ____/ /___ _   / /_____  ____  ____ _   / ____/ __ \\/ __ \\/ ____/_  __/  '),nl,
 write('    / /| | / __ \\/ __  / __ `/  / //_/ _ \\/ __ \\/ __ `/  / /   / / / / /_/ / __/   / /     '),nl,
 write('   / ___ |/ / / / /_/ / /_/ /  / ,< /  __/ / / / /_/ /  / /___/ /_/ / _, _/ /___  / /      '),nl,
-write('  /_/  |_/_/ /_/\\__,_/\\__,_/  /_/|_|\\___/_/ /_/\\__,_/   \\____/\\____/_/ |_/_____/ /_/       '),nl.
+write('  /_/  |_/_/ /_/\\__,_/\\__,_/  /_/|_|\\___/_/ /_/\\__,_/   \\____/\\____/_/ |_/_____/ /_/       '),nl,nl,
                                                                                         
 
-gameOver :-
 write('           __     __       ____  ___    ________  _______  _   __      __  '),nl,
 write('    ____  / /__  / /_     / __ \\/   |  / ____/  |/  / __ \\/ | / /  _ _/_/  '),nl,
 write('   / __ \\/ / _ \\/ __ \\   / / / / /| | / __/ / /|_/ / / / /  |/ /  (_) /    '),nl,
 write('  / /_/ / /  __/ / / /  / /_/ / ___ |/ /___/ /  / / /_/ / /|  /  _ / /     '),nl,
 write('  \\____/_/\\___/_/ /_/  /_____/_/  |_/_____/_/  /_/\\____/_/ |_/  (_) /      '),nl,
-write('                                                                  |_|      '),nl.
+write('                                                                  |_|      '),nl,nl,
 
-gameOver :-
-write('Coba lagi ya tahun depan huehue....'), nl.
+write('Coba lagi ya tahun depan huehue.... :( '), nl.
 
 
 youWin :-
@@ -133,20 +130,17 @@ write('  \\ \\/ /___  __  __   | |     / (_)___  / / /  / /_  ___ |__  /_  __   
 write('   \\  / __ \\/ / / /   | | /| / / / __ \\/ / /  / __ \\/ _ \\ /_ <| |/_/    '),nl,
 write('   / / /_/ / /_/ /    | |/ |/ / / / / /_/_/  / / / /  __/__/ />  <_ _ _ '),nl,
 write('  /_/\\____/\\__,_/     |__/|__/_/_/ /_(_|_)  /_/ /_/\\___/____/_/|_(_| | )'),nl,
-write('                                                          |/|/          '),nl.
+write('                                                          |/|/          '),nl,nl,
 
-youWin :-
 write('Malam bersama DAEMON itu terasa sangat penjang dan menegangkan. Berbagai macam rintangan dan halangan'), nl,
 write('kamu lalui bersama para tokemon kebanggaanmu. Kamu berhasil menyelesaikan permasalahan angkatan para '), nl,
-write('tokemon-tokemonmu. Kamu juga berhasil membuktikan komitmenmu melalui pertandingan melawan DAEMON.... '), nl.
+write('tokemon-tokemonmu. Kamu juga berhasil membuktikan komitmenmu melalui pertandingan melawan DAEMON.... '), nl,nl,
 
-youWin :-
-write('Maka dari itu, bersenanglah!!!,'), nl,
-write('               berbahagialah,  '), nl,
-write(' hiruplah udara pagi yang segar nan tidak kelihatan ini... '), nl,
-write(' jangan lupa bersyukur..., jangan lupa sholat..., karena kamu...'), nl.
+write('Maka dari itu, bersenanglah...,'), nl,
+write('berbahagialah...,  '), nl,
+write('hiruplah udara pagi yang segar nan tidak kelihatan ini... '), nl,
+write('jangan lupa bersyukur..., jangan lupa sholat..., karena kamu...'), nl,nl,
 
-youWin :-
 write('      __    ___    _   ________________  __  ________   ______     ____  '), nl,
 write('     / /   /   |  / | / /_  __/  _/ __ \\/ / / / ____/  / / / /  _ / __ \\ '), nl,
 write('    / /   / /| | /  |/ / / /  / // / / / / / / __/    / / / /  (_) / / / '), nl,
