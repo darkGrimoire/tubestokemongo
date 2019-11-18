@@ -199,7 +199,7 @@ evolve(Tokemon) :-
     write('Shortly after you evolved, the ground crumbles...'),nl,
     write('The Daemon unleashed as it smells your scent of power...'),nl,
     write('Will you be able to defeat it?'),nl,nl,
-    asserta(musuh(daemon,superlegendary,hmif,135182,135182,konsekuensi,2000,pencoretan,4000,1,0,10000)),
+    asserta(musuh(999,daemon,superlegendary,hmif,135182,135182,konsekuensi,2000,pencoretan,4000,1,0,10000)),
     asserta(inventory(A,Jenis,Tipe,B,C,NamaAtk,D,E,F,G,H,I)),!.
     
     
@@ -233,7 +233,7 @@ generateEncounter(Encounter) :-
 generateMusuh :-
     daemonFlag(1),
     random(1,10,X),
-    X mod 4 =:= 0 ->
+    X mod 2 =:= 0 ->
     (
         musuh(_,daemon,Jenis,Tipe,HP,MaxHP,Nama_attack,Damage_attack,Nama_sp,Damage_sp,Level,CurrExp,NeededExp),
         asserta(curMusuh(daemon,Jenis,Tipe,HP,MaxHP,Nama_attack,Damage_attack,Nama_sp,Damage_sp,Level,CurrExp,NeededExp)),
@@ -241,6 +241,8 @@ generateMusuh :-
         init_battle,!
     );(
         daemonFlag(1),
+        retract(probbattleFlag(_)),
+        write('But when you check it, there is... nothing?'),nl,
         write('You hear heavy footsteps closing...'),nl,!
     ),!.
 
