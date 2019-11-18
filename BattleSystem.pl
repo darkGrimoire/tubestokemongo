@@ -1,5 +1,5 @@
-:- include('utils.pl').
-:- include('player.pl').
+% :- include('utils.pl').
+% :- include('player.pl').
 :- dynamic(maxInventory/1).
 :- dynamic(equTokemon/12).
 :- dynamic(inventory/12).
@@ -107,19 +107,21 @@ battleStat :-
     inbattleFlag(_), defendFlag(_),
     checkDefend,
     curMusuh(EnemyTokemon,_,EnemyElmt,EnemyHP,EnemyMaxHP,_,_,_,_,_,_,_),
-    write(EnemyTokemon),nl,
-    write('Health: '), write(EnemyHP), write('/'), write(EnemyMaxHP),nl,
-    write('Elemental: '), write(EnemyElmt),nl,
+    write('                    Enemy                        '),nl,nl,
+    write('               '),write(EnemyTokemon),nl,
+    write('    Health:'), write(EnemyHP), write(' / '), write(EnemyMaxHP),nl,
+    write('                Elemental:  '), write(EnemyElmt),nl,nl,
+    write('                    Tokemon:                     '),nl,nl,
     equTokemon(Tokemon,_,Elmt,HP,MaxHP,_,_,_,_,_,_,_),
-    write(Tokemon),nl,
-    write('Health: '), write(HP), write('/'), write(MaxHP),nl,
-    write('Elemental: '), write(Elmt),nl,nl,
+    write('                '),write(Tokemon),nl,
+    write('    Health: '), write(HP), write('/'), write(MaxHP),nl,
+    write('    Elemental: '), write(Elmt),nl,nl,
     print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'),nl,
     battleChoice,!.
 
 battleStat :-
-    print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'),nl,
     inbattleFlag(_), \+defendFlag(_),
+    print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'),nl,
     curMusuh(EnemyTokemon,_,EnemyElmt,EnemyHP,EnemyMaxHP,_,_,_,_,_,_,_),
     write('                    Enemy                        '),nl,nl,
     write('               '),write(EnemyTokemon),nl,
@@ -193,7 +195,7 @@ attack :-
 attackCalc(ElmtModifier) :-
     curMusuh(Enemy,Type,EnemyElmt,EnemyHP,EnemyMaxHP,EnemyNameAttack,EnemyAttack,EnemyNameSpAttack,EnemySpAttack,EnemyLevel,EnemyCurEXP,EnemyNeededEXP),
     equTokemon(_,_,_,_,_,_,Attack,_,_,_,_,_),
-    Damage is Attack*ElmtModifier,
+    Damage is floor(Attack*ElmtModifier),
     write('You dealt '), write(Damage), write(' to '), write(Enemy), write('!'),nl,
     Damage < EnemyHP ->
     (
@@ -251,7 +253,7 @@ specialAttackUtil :-
 specialAttackCalc(ElmtModifier) :-
     curMusuh(Enemy,Type,EnemyElmt,EnemyHP,EnemyMaxHP,EnemyNameAttack,EnemyAttack,EnemyNameSpAttack,EnemySpAttack,EnemyLevel,EnemyCurEXP,EnemyNeededEXP),
     equTokemon(_,_,_,_,_,_,_,_,SpAttack,_,_,_),
-    Damage is SpAttack*ElmtModifier,
+    Damage is floor(SpAttack*ElmtModifier),
     write('You dealt '), write(Damage), write(' to '), write(Enemy), write('!'),nl,
     Damage < EnemyHP ->
     (
@@ -272,7 +274,7 @@ defend :-
 
 defend :-
     inbattleFlag(_),
-    write('You use defend!'),
+    write('You use defend!'),nl,
     retract(equTokemon(Tokemon,Type,Elmt,HP,MaxHP,NameAttack,Attack,NameSpAttack,SpAttack,Level,CurEXP,NeededEXP)),
     asserta(equTokemon(Tokemon,Type,defend,HP,MaxHP,NameAttack,Attack,NameSpAttack,SpAttack,Level,CurEXP,NeededEXP)),
     asserta(defendFlag(Elmt)),
@@ -366,7 +368,7 @@ checkSelaluBenar :-
 daemonSkill_SelaluBenar :-
     curMusuh(Enemy,_,_,_,_,_,_,_,EnemySpAttack,_,_,_),
     equTokemon(Tokemon,Type,Elmt,HP,MaxHP,NameAttack,Attack,NameSpAttack,SpAttack,Level,CurEXP,NeededEXP),
-    Damage is EnemySpAttack*2.5,
+    Damage is floor(EnemySpAttack*2.5),
     write('**WARNING**'),nl,
     write(Enemy),write(' use SELALU BENAR Skill!'),nl,
     write('**WARNING**'),nl,nl,
@@ -416,10 +418,10 @@ enemyNormalAttackCalc(ElmtModifier) :-
     defendFlag(_),
     curMusuh(Enemy,EnemyType,EnemyElmt,EnemyHP,EnemyMaxHP,EnemyNameAttack,EnemyAttack,EnemyNameSpAttack,EnemySpAttack,EnemyLevel,EnemyCurEXP,EnemyNeededEXP),
     equTokemon(Tokemon,Type,defend,HP,MaxHP,NameAttack,Attack,NameSpAttack,SpAttack,Level,CurEXP,NeededEXP),
-    Damage is EnemyAttack*ElmtModifier,
+    Damage is floor(EnemyAttack*ElmtModifier),
     Damage1 is Damage*0.5,
     Damage2 is EnemyHP*0.25,
-    Reflect is (Damage1+Damage2-abs(Damage1-Damage2))/2,
+    Reflect is floor((Damage1+Damage2-abs(Damage1-Damage2))/2),
     write(Enemy), write(' dealt '), write(Damage), write(' to you!'),nl,
     write('But... because your defend is active you can recounter your enemy\'s attack!'),nl,
     write('You dealt '), write(Reflect), write(' to '), write(Enemy), write('!'),nl,
@@ -434,7 +436,7 @@ enemyNormalAttackCalc(ElmtModifier) :-
         !
     );(
         defendFlag(_),
-        retract(equTokemon(Tokemon,_,_,_,_,_)),
+        retract(equTokemon(Tokemon,_,_,_,_,_,_,_,_,_,_,_)),
         retract(inbattleFlag(_)), asserta(losebattleFlag(1)),
         write('You has fallen!'),nl,
         loseBattle,!
@@ -444,7 +446,7 @@ enemyNormalAttackCalc(ElmtModifier) :-
     \+defendFlag(_),
     curMusuh(Enemy,_,_,_,_,_,EnemyAttack,_,_,_,_,_),
     equTokemon(Tokemon,Type,Elmt,HP,MaxHP,NameAttack,Attack,NameSpAttack,SpAttack,Level,CurEXP,NeededEXP),
-    Damage is EnemyAttack*ElmtModifier,
+    Damage is floor(EnemyAttack*ElmtModifier),
     write(Enemy), write(' dealt '), write(Damage), write(' to you!'),nl,
     Damage < HP ->
     (
@@ -454,7 +456,7 @@ enemyNormalAttackCalc(ElmtModifier) :-
         !
     );(
         \+defendFlag(_),
-        retract(equTokemon(Tokemon,_,_,_,_,_)),
+        retract(equTokemon(Tokemon,_,_,_,_,_,_,_,_,_,_,_)),
         retract(inbattleFlag(_)), asserta(losebattleFlag(1)),
         write('You has fallen!'),nl,
         loseBattle,!
@@ -491,10 +493,10 @@ enemySpecialAttackCalc(ElmtModifier) :-
     defendFlag(_),
     curMusuh(Enemy,EnemyType,EnemyElmt,EnemyHP,EnemyMaxHP,EnemyNameAttack,EnemyAttack,EnemyNameSpAttack,EnemySpAttack,EnemyLevel,EnemyCurEXP,EnemyNeededEXP),
     equTokemon(Tokemon,Type,defend,HP,MaxHP,NameAttack,Attack,NameSpAttack,SpAttack,Level,CurEXP,NeededEXP),
-    Damage is EnemyAttack*ElmtModifier,
+    Damage is floor(EnemyAttack*ElmtModifier),
     Damage1 is Damage*0.5,
     Damage2 is EnemyHP*0.25,
-    Reflect is (Damage1+Damage2-abs(Damage1-Damage2))/2,
+    Reflect is floor((Damage1+Damage2-abs(Damage1-Damage2))/2),
     write(Enemy), write(' dealt '), write(Damage), write(' to you!'),nl,
     write('But... because your defend is active you can recounter your enemy\'s attack!'),nl,
     write('You dealt '), write(Reflect), write(' to '), write(Enemy), write('!'),nl,
@@ -519,7 +521,7 @@ enemySpecialAttackCalc(ElmtModifier) :-
     \+defendFlag(_),
     curMusuh(Enemy,_,_,_,_,_,_,_,EnemySpAttack,_,_,_),
     equTokemon(Tokemon,Type,Elmt,HP,MaxHP,NameAttack,Attack,NameSpAttack,SpAttack,Level,CurEXP,NeededEXP),
-    Damage is EnemySpAttack*ElmtModifier,
+    Damage is floor(EnemySpAttack*ElmtModifier),
     write(Enemy), write(' dealt '), write(Damage), write(' to you!'),nl,
     Damage < HP ->
     (
@@ -627,7 +629,7 @@ endBattle :-
     retract(curMusuh(Enemy,_,_,_,_,_,_,_,_,_,_,_)),
     retract(winbattleFlag(_)),
     cekLegendaryObj,
-    !.
+    map,!.
 
 cekLegendaryObj :-
     \+winbattleFlag(_),!.
@@ -662,4 +664,4 @@ loseBattle :-
     write('You watch powerlessly seeing your tokemon dies in front of you...'),nl,
     write('You have no tokemon left. You lose.'),nl,nl,
     retract(curMusuh(_,_,_,_,_,_,_,_,_,_,_,_)),retract(losebattleFlag(_)), asserta(gameoverFlag(_)),
-    !.
+    gameOver,!.

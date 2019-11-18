@@ -1,15 +1,15 @@
-:-include('utils.pl').
-:-include('BattleSystem.pl').
+% :-include('utils.pl').
+% :-include('BattleSystem.pl').
 
 :-dynamic(inventory/12).  /*tokemon(nama)*/
 :-dynamic(musuh/13).
 
 /*isTokemon(Nama,Jenis,Tipe,HP,MaxHP,NamaAtk,DamageAtk,NamaSp,DamageSp,Level,CurrExp,NeededExp) */
 /*inisialisasi semua tokemon*/
-isTokemon(catamon,normal,water,HP,HP,cakarsaja,A,cakarbanget,SA,1,0,1000) :-
-    random(4700,5000,HP),
-    random(500,600,A),
-    random(700,800,SA).
+% isTokemon(catamon,normal,water,HP,HP,cakarsaja,A,cakarbanget,SA,1,0,1000) :-
+%     random(4700,5000,HP),
+%     random(500,600,A),
+%     random(700,800,SA).
 isTokemon(defrog,normal,water,HP,HP,kwok,A,frogyou,SA,1,0,1000) :-
     random(4700,5000,HP),
     random(500,600,A),
