@@ -16,6 +16,19 @@ loadd(File) :-
 	assertaList(Lines), !.
 
 save(_) :-
+	probbattleFlag(_),
+	write('You can\'t save your progress during battle...'), nl, !.
+	
+save(_) :-
+	inbattleFlag(_),
+	write('You can\'t save your progress during battle...'), nl, !.
+
+save(_) :-
+	pbattleFlag(_),
+	write('You can\'t save your progress during battle...'), nl, !.
+
+
+save(_) :-
 	\+gameStarted(_),
 	write('Command tidak dapat dilakukan karena game belum dimulai...'), nl, !.
 
