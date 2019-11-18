@@ -12,7 +12,7 @@
 :- include('utils.pl').
 :- include('ExternalFile.pl').
 :- include('BattleSystem.pl').
-%:- include('tokemon.pl').
+:- include('tokemon.pl').
 /*-----------------------------------------*/
 
 start :-
