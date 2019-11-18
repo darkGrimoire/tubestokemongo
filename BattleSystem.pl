@@ -21,6 +21,9 @@
 :- dynamic(wingameFlag/1).
 
 /* For debugging purpose */
+debugEvolve :-
+    asserta(inventory(radarmon, normal, signum, 50000, 50000, laprak, 2500, radiasi, 8000,3,5500,5000)).
+
 debugBiasa :- write('a wild hewwo appears!'),nl,
     asserta(inventory(radarmon, normal, signum, 50000, 50000, laprak, 2500, radiasi, 8000,3,10000,10000)),
     asserta(curMusuh(garamon,legendary,water,21020,21020,salt,1200,saltbae,2000,1,0,10000)),!.
@@ -601,7 +604,7 @@ capture :-
     cekBanyakTokemon(N),
     N < 6,
     curMusuh(Enemy,Type,EnemyElmt,EnemyHP,EnemyMaxHP,EnemyNameAttack,EnemyAttack,EnemyNameSpAttack,EnemySpAttack,EnemyLevel,EnemyCurEXP,EnemyNeededEXP),
-    NewEnemyHP is floor(min(EnemyMaxHP, EnemyHP*1.5)),
+    NewEnemyHP is floor(0.5*EnemyMaxHP),
     addTokemon(Enemy,Type,EnemyElmt,NewEnemyHP,EnemyMaxHP,EnemyNameAttack,EnemyAttack,EnemyNameSpAttack,EnemySpAttack,EnemyLevel,EnemyCurEXP,EnemyNeededEXP),
     write('You captured '), write(Enemy), write('!'),nl,
     endBattle,!.
@@ -628,10 +631,42 @@ endBattle :-
 
 endBattle :-
     winbattleFlag(_),
+    shareEXP(EXP),
+    write('You got '), write(EXP), write(' EXPs!'),nl,
     retract(curMusuh(Enemy,_,_,_,_,_,_,_,_,_,_,_)),
     retract(winbattleFlag(_)),
     cekLegendaryObj,
     map,!.
+
+shareEXP(Cuan) :-
+    curMusuh(Enemy,Type,_,_,_,_,_,_,_,_,_,_),
+    Type == legendary,
+    random(1500,2000,Cuan),
+    forall((inventory(Tokemon, Type, Elemental, HP, MaxHP, NamaAtk, Atk, NamaSpAtk, SpAtk, Lvl, CurExp, NeededExp), Tokemon \== Enemy), (
+        NewCurExp is CurExp+Cuan,
+        retract(inventory(Tokemon, Type, Elemental, HP, MaxHP, NamaAtk, Atk, NamaSpAtk, SpAtk, Lvl, CurExp, NeededExp)),
+        asserta(inventory(Tokemon, Type, Elemental, HP, MaxHP, NamaAtk, Atk, NamaSpAtk, SpAtk, Lvl, NewCurExp, NeededExp))
+        )),!.
+
+shareEXP(Cuan) :-
+    curMusuh(Enemy,Type,_,_,_,_,_,_,_,_,_,_),
+    Type == normal,
+    random(500, 750, Cuan),
+    forall((inventory(Tokemon, Type, Elemental, HP, MaxHP, NamaAtk, Atk, NamaSpAtk, SpAtk, Lvl, CurExp, NeededExp), Tokemon \== Enemy), (
+        NewCurExp is CurExp+Cuan,
+        retract(inventory(Tokemon, Type, Elemental, HP, MaxHP, NamaAtk, Atk, NamaSpAtk, SpAtk, Lvl, CurExp, NeededExp)),
+        asserta(inventory(Tokemon, Type, Elemental, HP, MaxHP, NamaAtk, Atk, NamaSpAtk, SpAtk, Lvl, NewCurExp, NeededExp))
+        )),!.
+
+shareEXP(Cuan) :-
+    curMusuh(Enemy,Type,_,_,_,_,_,_,_,_,_,_),
+    Type == superlegendary,
+    Cuan is 5000,
+    forall((inventory(Tokemon, Type, Elemental, HP, MaxHP, NamaAtk, Atk, NamaSpAtk, SpAtk, Lvl, CurExp, NeededExp), Tokemon \== Enemy, CurExp =\= -1), (
+        NewCurExp is CurExp+5000,
+        retract(inventory(Tokemon, Type, Elemental, HP, MaxHP, NamaAtk, Atk, NamaSpAtk, SpAtk, Lvl, CurExp, NeededExp)),
+        asserta(inventory(Tokemon, Type, Elemental, HP, MaxHP, NamaAtk, Atk, NamaSpAtk, SpAtk, Lvl, NewCurExp, NeededExp))
+        )),!.
 
 cekLegendaryObj :-
     \+winbattleFlag(_),!.

@@ -39,7 +39,7 @@ start :-
     
     init_map,
     init_player,
-    init_musuh(10),
+    init_musuh(14),
     asserta(gameStarted(1)),
     !.
 menu:-
@@ -53,7 +53,9 @@ menu:-
     write('% 6. d      : gerak ke ke timur 1 langkah                                      %'),nl,
     write('% 7. a      : gerak ke barat 1 langkah                                         %'),nl,
     write('% 8. help   : menampilkan segala bantuan                                       %'),nl,
-    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'),nl.
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'),nl,
+    apakahBisaLevelUp(Bisa1), isReadytoEvolve(Bisa2).
+    
 
 help :-
     menu,
@@ -91,7 +93,8 @@ map :-
         )),
         nl
     )),
-!.
+    apakahBisaLevelUp(Bisa1), isReadytoEvolve(Bisa2),
+    !.
 
 
 quit :-

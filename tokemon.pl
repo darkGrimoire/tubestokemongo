@@ -152,6 +152,9 @@ apakahBisaLevelUp(Bisa) :-
     length(ListNonMaxLevel,Panjang),
     Panjang \== 0 ->
     (
+        write('Wow I think you\'re tokemon is mature enough to level up!'),nl,
+        write('You can level up these tokemons: '), printList(ListNonMaxLevel),nl,
+        write('use [levelUp(X)] to levelup!'),nl,
         Bisa = yes,!
     );(
         Bisa = no,!
@@ -162,6 +165,9 @@ isReadytoEvolve(X) :-
     length(ListEvolve,Panjang),
     Panjang \== 0 ->
     (
+        write('Your tokemon(s) is ready to evolve!'),nl,
+        write('You can evolve these tokemons: '), printList(ListEvolve),nl,
+        write('use [evolve(X)] to evolve!'),nl,
         X = ready,!
     );(
         X = no,!
@@ -169,6 +175,9 @@ isReadytoEvolve(X) :-
 
 evolve(Tokemon) :-
     daemonFlag(1),
+    findall(X, (inventory(X,_,_,_,_,_,_,_,_,Level,CurrExp,NeededExp), Level==3, CurrExp>=NeededExp), ListEvolve),
+    searchX(ListEvolve, Tokemon, Idx),
+    Idx =\= -1,
     inventory(Tokemon,Jenis,Tipe,HP,MaxHP,NamaAtk,DamageAtk,NamaSp,DamageSp,Level,CurrExp,NeededExp),
     retract(inventory(Tokemon,Jenis,Tipe,HP,MaxHP,NamaAtk,DamageAtk,NamaSp,DamageSp,Level,CurrExp,NeededExp)),
     isEvolve(A,Jenis,Tipe,B,C,NamaAtk,D,E,F,G,H,I),
@@ -178,10 +187,13 @@ evolve(Tokemon) :-
 
 evolve(Tokemon) :-
     \+daemonFlag(_),
+    findall(X, (inventory(X,_,_,_,_,_,_,_,_,Level,CurrExp,NeededExp), Level==3, CurrExp>=NeededExp), ListEvolve),
+    searchX(ListEvolve, Tokemon, Idx),
+    Idx =\= -1,
     inventory(Tokemon,Jenis,Tipe,HP,MaxHP,NamaAtk,DamageAtk,NamaSp,DamageSp,Level,CurrExp,NeededExp),
     retract(inventory(Tokemon,Jenis,Tipe,HP,MaxHP,NamaAtk,DamageAtk,NamaSp,DamageSp,Level,CurrExp,NeededExp)),
     isEvolve(A,Jenis,Tipe,B,C,NamaAtk,D,E,F,G,H,I),
-    asserta(daemonFlag(_)),
+    asserta(daemonFlag(1)),
     write('Congratzszszs!!! Your '), write(Tokemon), write(' is now evolving into something new... '), nl,
     write(A), write(!), nl,nl,
     write('Shortly after you evolved, the ground crumbles...'),nl,
@@ -192,6 +204,9 @@ evolve(Tokemon) :-
     
     
 levelUp(Tokemon) :-
+    findall(X, (inventory(X,_,_,_,_,_,_,_,_,Level,CurrExp,NeededExp), Level<3, CurrExp>=NeededExp), ListNonMaxLevel),
+    searchX(ListNonMaxLevel, Tokemon, Idx),
+    Idx =\= -1,
     inventory(Tokemon,Jenis,Tipe,HP,MaxHP,NamaAtk,DamageAtk,NamaSp,DamageSp,Level,CurrExp,NeededExp),
     NewLevel is Level+1,
     NewNeededExp is NeededExp+(NeededExp*1.2),
@@ -200,8 +215,8 @@ levelUp(Tokemon) :-
     random(BatasBawah, BatasAtas, PlusHP),
     NewMaxHP is floor(MaxHP+PlusHP),
     NewHP is floor(HP+(PlusHP*0.8)),
-    NewDamageAtk is (DamageAtk+(0.1*PlusHP)),
-    NewDamageSp is (DamageSp+(0.1*PlusHP)),
+    NewDamageAtk is floor(DamageAtk+(0.1*PlusHP)),
+    NewDamageSp is floor(DamageSp+(0.1*PlusHP)),
     retract(inventory(Tokemon,Jenis,Tipe,HP,MaxHP,NamaAtk,DamageAtk,NamaSp,DamageSp,Level,CurrExp,NeededExp)),
     asserta(inventory(Tokemon,Jenis,Tipe,NewHP,NewMaxHP,NamaAtk,NewDamageAtk,NamaSp,NewDamageSp,NewLevel,CurrExp,NewNeededExp)),
     write('Congratzszszs!!! Your '), write(Tokemon), write(' is now on level '), write(NewLevel), write('!'), nl, !.
@@ -277,6 +292,7 @@ generatePeluangRun(X) :-
     (
         X = berhasil,!
     );(
+        \+daemonFlag(_),
         X = gagal,!
     ),!.
 

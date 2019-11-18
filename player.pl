@@ -286,7 +286,7 @@ status :-
 	
 	forall(inventory(Tokemon, Type, Elemental, HP, MaxHP, NamaAtk, Atk, NamaSpAtk, SpAtk, Lvl, CurExp, NeededExp), (
 
-		write('  --> '), write('Name: '), write(Tokemon), nl,
+		write('  --> '), write('Name: '), write(Tokemon), write('[Lv. '),write(Lvl),write(']'),nl,
 		write('      Type: '), write(Type), nl,
 		write('      Elemental: '), write(Elemental), nl,
 		write('      Health: '), write(HP), write('/'), write(MaxHP), nl,
