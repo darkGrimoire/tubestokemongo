@@ -107,6 +107,26 @@ write('   / / __/ __ `/ __ `__ \\/ _ \\   / / / / | / / _ \\/ ___/'),nl,
 write('  / /_/ / /_/ / / / / / /  __/  / /_/ /| |/ /  __/ /    '),nl,
 write('  \\____/\\__,_/_/ /_/ /_/\\___/   \\____/ |___/\\___/_/     '),nl,nl.
 
+gameOver :-
+write('      ___              __         __                       __________  ____  ____________  '),nl,
+write('     /   |  ____  ____/ /___ _   / /_____  ____  ____ _   / ____/ __ \\/ __ \\/ ____/_  __/  '),nl,
+write('    / /| | / __ \\/ __  / __ `/  / //_/ _ \\/ __ \\/ __ `/  / /   / / / / /_/ / __/   / /     '),nl,
+write('   / ___ |/ / / / /_/ / /_/ /  / ,< /  __/ / / / /_/ /  / /___/ /_/ / _, _/ /___  / /      '),nl,
+write('  /_/  |_/_/ /_/\\__,_/\\__,_/  /_/|_|\\___/_/ /_/\\__,_/   \\____/\\____/_/ |_/_____/ /_/       '),nl.
+                                                                                        
+
+gameOver :-
+write('           __     __       ____  ___    ________  _______  _   __      __  '),nl,
+write('    ____  / /__  / /_     / __ \\/   |  / ____/  |/  / __ \\/ | / /  _ _/_/  '),nl,
+write('   / __ \\/ / _ \\/ __ \\   / / / / /| | / __/ / /|_/ / / / /  |/ /  (_) /    '),nl,
+write('  / /_/ / /  __/ / / /  / /_/ / ___ |/ /___/ /  / / /_/ / /|  /  _ / /     '),nl,
+write('  \\____/_/\\___/_/ /_/  /_____/_/  |_/_____/_/  /_/\\____/_/ |_/  (_) /      '),nl,
+write('                                                                  |_|      '),nl.
+
+gameOver :-
+write('Coba lagi ya tahun depan huehue....'), nl.
+
+
 youWin :-
 write('  __  __               _       ___       ____   __        _____         '),nl,
 write('  \\ \\/ /___  __  __   | |     / (_)___  / / /  / /_  ___ |__  /_  __    '),nl,
@@ -114,3 +134,23 @@ write('   \\  / __ \\/ / / /   | | /| / / / __ \\/ / /  / __ \\/ _ \\ /_ <| |/_/
 write('   / / /_/ / /_/ /    | |/ |/ / / / / /_/_/  / / / /  __/__/ />  <_ _ _ '),nl,
 write('  /_/\\____/\\__,_/     |__/|__/_/_/ /_(_|_)  /_/ /_/\\___/____/_/|_(_| | )'),nl,
 write('                                                          |/|/          '),nl.
+
+youWin :-
+write('Malam bersama DAEMON itu terasa sangat penjang dan menegangkan. Berbagai macam rintangan dan halangan'), nl,
+write('kamu lalui bersama para tokemon kebanggaanmu. Kamu berhasil menyelesaikan permasalahan angkatan para '), nl,
+write('tokemon-tokemonmu. Kamu juga berhasil membuktikan komitmenmu melalui pertandingan melawan DAEMON.... '), nl.
+
+youWin :-
+write('Maka dari itu, bersenanglah!!!,'), nl,
+write('               berbahagialah,  '), nl,
+write(' hiruplah udara pagi yang segar nan tidak kelihatan ini... '), nl,
+write(' jangan lupa bersyukur..., jangan lupa sholat..., karena kamu...'), nl.
+
+youWin :-
+write('      __    ___    _   ________________  __  ________   ______     ____  '), nl,
+write('     / /   /   |  / | / /_  __/  _/ __ \\/ / / / ____/  / / / /  _ / __ \\ '), nl,
+write('    / /   / /| | /  |/ / / /  / // / / / / / / __/    / / / /  (_) / / / '), nl,
+write('   / /___/ ___ |/ /|  / / / _/ // /_/ / /_/ / /___   /_/_/_/  _ / /_/ /  '), nl,
+write('  /_____/_/  |_/_/ |_/ /_/ /___/\\___\\_\\____/_____/  (_|_|_)  (_)_____/   '), nl.
+                                                                      
+                                                          
