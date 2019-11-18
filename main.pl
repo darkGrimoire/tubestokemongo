@@ -39,7 +39,7 @@ start :-
     
     init_map,
     init_player,
-    init_musuh(14),
+    init_musuh(17),
     asserta(gameStarted(1)),
     !.
 menu:-
