@@ -234,13 +234,13 @@ run :-
 run :- 
 	\+daemonFlag(_),
 	generatePeluangRun(Hasil2),
-		Hasil2 == berhasil(
+		Hasil2 == berhasil -> (
 			write('You successfully escape the tokemon, continue the journey!'), nl, !
 		);(
 			\+daemonFlag(_),
 			write('You fail to escape the tokemon... Prepare for the battle!!'), nl,
 			generateMusuh, !
-		).
+		),!.
 
 run :- 
 	daemonFlag(1),
