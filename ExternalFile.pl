@@ -63,19 +63,19 @@ writeObstacle :-
 		)), !.
 
 writeFlag :-
-	spAvailable(_) -> (write(spAvailable(1)),write('.'),nl,!) ; (),
-	spEnemyAvailable(_) -> (write(spEnemyAvailable(1)),write('.'),nl,!) ; (),
-	daemonFlag(_) -> (write(daemonFlag(1)),write('.'),nl,!) ; (),
-	selaluBenarAvailable(_) -> (write(selaluBenarAvailable(1)),write('.'),nl,!) ; (),
-	selaluBenarCD(_) -> (write(selaluBenarCD(1)),write('.'),nl,!) ; (),
-	defendFlag(_) -> (write(defendFlag(1)),write('.'),nl,!) ; (),
-	pbattleFlag(_) -> (write(pbattleFlag(1)),write('.'),nl,!) ; (),
-	inbattleFlag(_) -> (write(inbattleFlag(1)),write('.'),nl,!) ; (),
-	winbattleFlag(_) -> (write(winbattleFlag(1)),write('.'),nl,!) ; (),
-	losebattleFlag(_) -> (write(losebattleFlag(1)),write('.'),nl,!) ; (),
-	gameoverFlag(_) -> (write(gameoverFlag(1)),write('.'),nl,!) ; (),
-	wingameFlag(_) -> (write(wingameFlag(1)),write('.'),nl,!) ; (),
-	probbattleFlag(_) -> (write(probbattleFlag(1)),write('.'),nl,!) ; ().
+	spAvailable(_) -> (write(spAvailable(1)),write('.'),nl,!) ; (true),
+	spEnemyAvailable(_) -> (write(spEnemyAvailable(1)),write('.'),nl,!) ; (true),
+	daemonFlag(_) -> (write(daemonFlag(1)),write('.'),nl,!) ; (true),
+	selaluBenarAvailable(_) -> (write(selaluBenarAvailable(1)),write('.'),nl,!) ; (true),
+	selaluBenarCD(_) -> (write(selaluBenarCD(1)),write('.'),nl,!) ; (true),
+	defendFlag(_) -> (write(defendFlag(1)),write('.'),nl,!) ; (true),
+	pbattleFlag(_) -> (write(pbattleFlag(1)),write('.'),nl,!) ; (true),
+	inbattleFlag(_) -> (write(inbattleFlag(1)),write('.'),nl,!) ; (true),
+	winbattleFlag(_) -> (write(winbattleFlag(1)),write('.'),nl,!) ; (true),
+	losebattleFlag(_) -> (write(losebattleFlag(1)),write('.'),nl,!) ; (true),
+	gameoverFlag(_) -> (write(gameoverFlag(1)),write('.'),nl,!) ; (true),
+	wingameFlag(_) -> (write(wingameFlag(1)),write('.'),nl,!) ; (true),
+	probbattleFlag(_) -> (write(probbattleFlag(1)),write('.'),nl,!) ; (true).
 
 writeHeal :-
 	\+alreadyHeal(_), !.
