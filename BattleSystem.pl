@@ -431,7 +431,7 @@ enemyNormalAttackCalc(ElmtModifier) :-
         NewHP is HP-Damage,
         retract(equTokemon(Tokemon,_,_,_,_,_,_,_,_,_,_,_)),
         asserta(equTokemon(Tokemon,Type,Elmt,NewHP,MaxHP,NameAttack,Attack,NameSpAttack,SpAttack,Level,CurEXP,NeededEXP)),
-        NewEnemyHP is EnemyHP-Damage,
+        NewEnemyHP is EnemyHP-Reflect,
         retract(curMusuh(Enemy,_,_,_,_,_,_,_,_,_,_,_)),
         asserta(curMusuh(Enemy,EnemyType,EnemyElmt,NewEnemyHP,EnemyMaxHP,EnemyNameAttack,EnemyAttack,EnemyNameSpAttack,EnemySpAttack,EnemyLevel,EnemyCurEXP,EnemyNeededEXP)),
         !
@@ -506,7 +506,7 @@ enemySpecialAttackCalc(ElmtModifier) :-
         NewHP is HP-Damage,
         retract(equTokemon(Tokemon,_,_,_,_,_,_,_,_,_,_,_)),
         asserta(equTokemon(Tokemon,Type,Elmt,NewHP,MaxHP,NameAttack,Attack,NameSpAttack,SpAttack,Level,CurEXP,NeededEXP)),
-        NewEnemyHP is EnemyHP-Damage,
+        NewEnemyHP is EnemyHP-Reflect,
         retract(curMusuh(Enemy,_,_,_,_,_,_,_,_,_,_,_)),
         asserta(curMusuh(Enemy,EnemyType,EnemyElmt,NewEnemyHP,EnemyMaxHP,EnemyNameAttack,EnemyAttack,EnemyNameSpAttack,EnemySpAttack,EnemyLevel,EnemyCurEXP,EnemyNeededEXP)),
         !
