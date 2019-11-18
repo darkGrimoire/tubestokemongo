@@ -232,13 +232,20 @@ run :-
 	!.
 
 run :- 
+	\+daemonFlag(_),
 	generatePeluangRun(Hasil2),
-		Hasil2 = berhasil(
+		Hasil2 == berhasil(
 			write('You successfully escape the tokemon, continue the journey!'), nl, !
 		);(
+			\+daemonFlag(_),
 			write('You fail to escape the tokemon... Prepare for the battle!!'), nl,
 			generateMusuh, !
 		).
+
+run :- 
+	daemonFlag(1),
+	generatePeluangRun(Hasil2),
+		generateMusuh,!.
 
 fight :-
 	inbattleFlag(_),
@@ -251,6 +258,12 @@ fight :-
 	!.
 
 fight :-
+	daemonFlag(1),
+	% write('You choose to fight, may the force be with you!'), nl,
+	generateMusuh, !.
+
+fight :-
+	\+daemonFlag(_),
 	write('You choose to fight, may the force be with you!'), nl,
 	generateMusuh, !.
 

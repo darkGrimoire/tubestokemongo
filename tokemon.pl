@@ -6,14 +6,23 @@
 
 /*isTokemon(Nama,Jenis,Tipe,HP,MaxHP,NamaAtk,DamageAtk,NamaSp,DamageSp,Level,CurrExp,NeededExp) */
 /*inisialisasi semua tokemon*/
-% isTokemon(catamon,normal,water,HP,HP,cakarsaja,A,cakarbanget,SA,1,0,1000) :-
+% isTokemon(catamon,normal,water,HP,HP,cakaraja,A,cakarbanget,SA,1,0,1000) :-
 %     random(4700,5000,HP),
 %     random(500,600,A),
 %     random(700,800,SA).
+isTokemon(kudamon,normal,water,HP,HP,ikikikiki,A,tendangan_maut,SA,1,0,1000) :-
+    random(4700,5000,HP),
+    random(500,600,A),
+    random(700,800,SA).
 isTokemon(defrog,normal,water,HP,HP,kwok,A,frogyou,SA,1,0,1000) :-
     random(4700,5000,HP),
     random(500,600,A),
     random(700,800,SA).
+isTokemon(lotusmon,normal,water,HP,HP,splash,A,tenggelamkan,SA,1,0,1000) :-
+    random(4700,5000,HP),
+    random(500,600,A),
+    random(700,800,SA).
+    
 isTokemon(anjingmon,normal,fire,HP,HP,gukguk,A,anjingsia,SA,1,0,1000) :-
     random(4500,4800,HP),
     random(550,650,A),
@@ -22,6 +31,11 @@ isTokemon(nagamon,normal,fire,HP,HP,sembursaja,A,duarr,SA,1,0,1000) :-
     random(4500,4800,HP),
     random(550,650,A),
     random(700,800,SA).
+isTokemon(potatomon,normal,fire,HP,HP,potatopunch,A,boiledpotato,SA,1,0,1000) :-
+    random(4500,4800,HP),
+    random(550,650,A),
+    random(700,800,SA).
+    
 isTokemon(birdmon,normal,leaves,HP,HP,cuitcuit,A,ciutciut,SA,1,0,1000) :-
     random(4000,4200,HP),
     random(650,750,A),
@@ -30,6 +44,9 @@ isTokemon(tikusmon,normal,leaves,HP,HP,puptikus,A,gigit_nih,SA,1,0,1000) :-
     random(4000,4200,HP),
     random(650,750,A),
     random(850,950,SA).
+isTokemon(salamander,normal,leaves,HP,HP,lick,A,poison,SA,1,0,1000) :-
+
+    
 isTokemon(kodingmon,normal,hmif,HP,HP,sublime,A,vscode,SA,1,0,1000) :-
     random(4700,5000,HP),
     random(500,600,A),
@@ -42,6 +59,7 @@ isTokemon(radarmon,normal,signum,HP,HP,laprak,A,radiasi,SA,1,0,1000) :-
     random(4700,5000,HP),
     random(500,600,A),
     random(700,800,SA).
+    
 isTokemon(garamon,legendary,water,21020,21020,salt,1200,saltbae,2000,1,0,10000).
 isTokemon(kumon,legendary,fire,12345,12345,english,1234,math,2345,1,0,10000).
 isTokemon(doraemon,legendary,leaves,9500,9500,baling_bambu,3000,time_machine,5000,1,0,10000).
@@ -50,7 +68,7 @@ isTokemon(doraemon,legendary,leaves,9500,9500,baling_bambu,3000,time_machine,500
 isTokemon(daemon,superlegendary,hmif,135182,135182,konsekuensi,2000,pencoretan,4000,1,0,10000). 
 
 /*inisialisasi bentuk evolving dari semua tokemon*/
-isEvolve(singamon,normal,water,HP,HP,cakarsaja,A,cakarbangetbanget,SA,0,-1,0) :-
+isEvolve(singamon,normal,water,HP,HP,cakaraja,A,cakarbangetbanget,SA,0,-1,0) :-
     random(47000,50000,HP),
     random(5000,6000,A),
     random(7000,8000,SA).
@@ -112,6 +130,14 @@ isReadytoEvolve(X) :-
     ),!.
 
 evolve(Tokemon) :-
+    daemonFlag(1),
+    inventory(Tokemon,Jenis,Tipe,HP,MaxHP,NamaAtk,DamageAtk,NamaSp,DamageSp,Level,CurrExp,NeededExp),
+    retract(inventory(Tokemon,Jenis,Tipe,HP,MaxHP,NamaAtk,DamageAtk,NamaSp,DamageSp,Level,CurrExp,NeededExp)),
+    isEvolve(A,Jenis,Tipe,B,C,NamaAtk,D,E,F,G,H,I),
+    asserta(inventory(A,Jenis,Tipe,B,C,NamaAtk,D,E,F,G,H,I)),!.
+
+evolve(Tokemon) :-
+    \+daemonFlag(_),
     inventory(Tokemon,Jenis,Tipe,HP,MaxHP,NamaAtk,DamageAtk,NamaSp,DamageSp,Level,CurrExp,NeededExp),
     retract(inventory(Tokemon,Jenis,Tipe,HP,MaxHP,NamaAtk,DamageAtk,NamaSp,DamageSp,Level,CurrExp,NeededExp)),
     isEvolve(A,Jenis,Tipe,B,C,NamaAtk,D,E,F,G,H,I),
@@ -168,6 +194,7 @@ generateMusuh :-
     (
         ambilMusuhLegendary,!
     );(
+        \+daemonFlag(_),
         ambilMusuhNormal,!
     ),!.
 
@@ -204,7 +231,7 @@ generatePeluangRun(X) :-
 generatePeluangRun(X) :- 
     \+daemonFlag(_),
     random(1,10,Num),
-    Num mod 4 =:= 0 ->
+    Num mod 2 =:= 0 ->
     (
         X = berhasil,!
     );(
