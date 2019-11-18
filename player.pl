@@ -12,16 +12,15 @@
 
 init_player :-
 	% random(4700,5000,HP),
-    random(500,600,A),
-    random(700,800,SA),
-    asserta(inventory(catamon,normal,water,5000,5000,cakarAja,A,cakarBanget,SA,1,0,1000)),
+    random(600,700,A),
+    random(800,900,SA),
+    asserta(inventory(catamon,normal,hmif,5000,5000,cakarAja,A,cakarBanget,SA,1,0,1000)),
 	asserta(maxTokemon(6)),
     tinggipeta(Height), lebarpeta(Width),
     H is Height+1, W is Width+1,
     random(1,H,Y),
     random(1,W,X),
     asserta(pos(X,Y)).
-
 
 %cari banyak tokemon yang lagi dipunya
 
