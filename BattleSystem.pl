@@ -600,7 +600,8 @@ capture :-
     cekBanyakTokemon(N),
     N < 6,
     curMusuh(Enemy,Type,EnemyElmt,EnemyHP,EnemyMaxHP,EnemyNameAttack,EnemyAttack,EnemyNameSpAttack,EnemySpAttack,EnemyLevel,EnemyCurEXP,EnemyNeededEXP),
-    addTokemon(Enemy,Type,EnemyElmt,EnemyHP,EnemyMaxHP,EnemyNameAttack,EnemyAttack,EnemyNameSpAttack,EnemySpAttack,EnemyLevel,EnemyCurEXP,EnemyNeededEXP),
+    NewEnemyHP is floor(min(EnemyMaxHP, EnemyHP*1.5)),
+    addTokemon(Enemy,Type,EnemyElmt,NewEnemyHP,EnemyMaxHP,EnemyNameAttack,EnemyAttack,EnemyNameSpAttack,EnemySpAttack,EnemyLevel,EnemyCurEXP,EnemyNeededEXP),
     write('You captured '), write(Enemy), write('!'),nl,
     endBattle,!.
 
