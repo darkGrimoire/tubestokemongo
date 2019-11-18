@@ -268,7 +268,9 @@ status :-
 
 	cekBanyakTokemon(Banyak), cekBanyakLegendaryTokemon(BanyakLegendary),
 	write('You have acquired '), write(Banyak), write(' tokemons!!'), nl,
-	write('...dengan '), write(BanyakLegendary), write(' di antaranya adalah legendary! WOW!'), nl,
+	BanyakLegendary > 0 -> (write('...dengan '), write(BanyakLegendary), write(' di antaranya adalah legendary! WOW!'));
+	(write('sayangnya kamu belum punya legendary tokemon apa-apa. Dicari lagi mas...')),nl,
+	
 	forall(inventory(Tokemon, Type, Elemental, HP, MaxHP, NamaAtk, Atk, NamaSpAtk, SpAtk, Lvl, CurExp, NeededExp), (
 
 		write('  --> '), write('Name: '), write(Tokemon), nl,
