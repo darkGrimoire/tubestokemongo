@@ -6,7 +6,7 @@ loadd(_) :-
 	write('Game sudah dimulai, silakan exit dulu kalo mau load game'), nl, !.
 
 loadd(File) :-
-	\+file_exists(File),
+	\+exists_file(File),
 	write('File '), write(File), write(' tidak ditemukan...'), nl, !.
 
 loadd(File) :-

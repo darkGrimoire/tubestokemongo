@@ -14,7 +14,7 @@ init_player :-
 	% random(4700,5000,HP),
     random(600,700,A),
     random(800,900,SA),
-    asserta(inventory(catamon,normal,hmif,5000,5000,cakarAja,A,cakarBanget,SA,1,0,1000)),
+    asserta(inventory(catamon,normal,hmif,7500,7500,cakarAja,A,cakarBanget,SA,1,0,1000)),
 	asserta(maxTokemon(6)),
     tinggipeta(Height), lebarpeta(Width),
     H is Height+1, W is Width+1,
@@ -281,8 +281,6 @@ status :-
 
 	cekBanyakTokemon(Banyak), cekBanyakLegendaryTokemon(BanyakLegendary),
 	write('You have acquired '), write(Banyak), write(' tokemons!!'), nl,
-	BanyakLegendary > 0 -> (write('...dengan '), write(BanyakLegendary), write(' di antaranya adalah legendary! WOW!'));
-	(write('sayangnya kamu belum punya legendary tokemon apa-apa. Dicari lagi mas...')),nl,
 	
 	forall(inventory(Tokemon, Type, Elemental, HP, MaxHP, NamaAtk, Atk, NamaSpAtk, SpAtk, Lvl, CurExp, NeededExp), (
 
@@ -306,4 +304,7 @@ status :-
 		write('      Skill Attack [Damage]: '), write(NamaAtk), write(' ['), write(Atk), write(']'), nl,
 		write('      Skill Special Attack [Damage]: '), write(NamaSpAtk), write(' ['), write(SpAtk), write(']'), nl,
 		write('      Level: '), write(Lvl), nl
-		)).
+		)),
+
+		BanyakLegendary > 0 -> (write('...dengan '), write(BanyakLegendary), write(' di antaranya adalah legendary! WOW!'));
+		(write('sayangnya kamu belum punya legendary tokemon apa-apa. Dicari lagi mas...')),nl,!.

@@ -124,7 +124,7 @@ write('  / /_/ / /  __/ / / /  / /_/ / ___ |/ /___/ /  / / /_/ / /|  /  _ / /   
 write('  \\____/_/\\___/_/ /_/  /_____/_/  |_/_____/_/  /_/\\____/_/ |_/  (_) /      '),nl,
 write('                                                                  |_|      '),nl,nl,
 
-write('Coba lagi ya tahun depan huehue.... :( '), nl, quit.
+write('Coba lagi ya tahun depan huehue.... :( '), nl.
 
 
 youWin :-
@@ -148,6 +148,41 @@ write('      __    ___    _   ________________  __  ________   ______     ____  
 write('     / /   /   |  / | / /_  __/  _/ __ \\/ / / / ____/  / / / /  _ / __ \\ '), nl,
 write('    / /   / /| | /  |/ / / /  / // / / / / / / __/    / / / /  (_) / / / '), nl,
 write('   / /___/ ___ |/ /|  / / / _/ // /_/ / /_/ / /___   /_/_/_/  _ / /_/ /  '), nl,
-write('  /_____/_/  |_/_/ |_/ /_/ /___/\\___\\_\\____/_____/  (_|_|_)  (_)_____/   '), nl, quit.
-                                                                      
+write('  /_____/_/  |_/_/ |_/ /_/ /___/\\___\\_\\____/_____/  (_|_|_)  (_)_____/   '), nl, hehe,nl.
+
+hehe:-
+    write('    NhyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyhM'),nl,
+    write('    N/-----------oyyyyyyyyyyyyyyyyyyyyyyyyys++++oyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyys-:M'),nl,
+    write('    N/:+os+:-----dMMMMMMMMMMMMMMMMMMMMMMMMMd----/MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMm-:M'),nl,
+    write('    N/:+os+:-----shhhhhhhhhhhhhhhhhhhhhhhhhs----/hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhy-:M'),nl,
+    write('    N/:++++:-----ydddddddddddddddddddddddddh++++odddddddddddddddddddddddddddddddddddddddddddddddddddh-:M'),nl,
+    write('    N/:++ss:-----dMMMMMMMMMMMMMMMMMMMMMMMMMd----/MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMm-:M'),nl,
+    write('    N/:oo/:------+ssssssssssssssssssssssssso::::/ssssssssssssssssssssssssssssssssssssssssssssssssssso-:M'),nl,
+    write('    N/:+++s:-----/++++++MMMMMMMMMMMMMo+++++++++++++++++dMMMMMMMMMMMMh++++++++++++++++++++sMMMMMMMMMMm-:M'),nl,
+    write('    N/:+y+s/-----------:MMMMMMMMMMMMM/-----------------hMMMMMMMMMMMMy---------------------hMMMMMMMMMm-:M'),nl,
+    write('    N/--/+o:-----/++++++sssssssssssss++++++++++++++++++ossssssssssssoooooooooooo+++++++++++ooooooooo+-:M'),nl,
+    write('    N//o+++:-----------:MMMMMMMMMMMMM/-----------------hMMMMMMMMMMMMMMMMMMMMMMMMN-:+++o+::+o/://+:+/--:M'),nl,
+    write('    N//o+++:-----------:mmmmmmmmmmmmm/-----------------ymmmmmmmmmmmmmmmmmmmmmmmmd-/o//+s+o/s+oo//+o/--:M'),nl,
+    write('    N/:++os:-----/++++++yyyyyyyyyyyyy++++++++++++++++++syyyyyyyyyyyyyyyyyyyyyyyyy++s+o+y/o/s/oo+++ys+-:M'),nl,
+    write('    N/:sso/:-----------:MMMMMMMMMMMMM/-----------------hMMMMMMMMMMMMMMMMMMMMMMMMN-:o+:-+:+/-+/o:-:+s:-:M'),nl,
+    write('    N/:oo/::-----------:yyyyyyyyyyyyy:-----------------oyyyyyyyyyyyyyyyyyyyyyyyyy--:+///o+:-/o+os/+:--:M'),nl,
+    write('    N/-:yos:-----/++++++mmmmmmmmmmmmmo+++++++++++++++++hmmmmmmmmmmmmh++++++++++++++s:-:-//s-soyo:-/s+-:M'),nl,
+    write('    N//s+++:-----------:MMMMMMMMMMMMM/-----------------hMMMMMMMMMMMMy-------------+::/s+::s+oss+o--+--:M'),nl,
+    write('    N/-:++/:-----::::::/sssssssssssss/:::::::::::::::::+ssssssssssss+:::::::::::::o:oy/o+s+/::o+o+oo:-:M'),nl,
+    write('    N/:s+++:-----dMMMMMMMMMMMMMMMMMMMMMMMMMm////oMMMMMMMMMMMMMMMMMMMMMMMMMMMMh////+ooss+++/++//o+++s/-:M'),nl,
+    write('    N/-----------dMMMMMMMMMMMMMMMMMMMMMMMMMd----/MMMMMMMMMMMMMMMMMMMMMMMMMMMMy---:+--/://++s++/:----o-:M'),nl,
+    write('    N/-----------+oooooooooooooooooooooooooo+++++ooooooooooooooooooooooooooooo++++s+//:::ooooo::://+o-:M'),nl,
+    write('    N/-----------dMMMMMMMMMMMMMMMMMMMMMMMMMd----/MMMMMMMMMMMMMMMMMMMMMMMMMMMMy----/+///////////////o:-:M'),nl,
+    write('    N/------/+---ymmmmmmmmmmmmmmmmmmmmmmmmmy----/mmmmmmmmmmmmmmmmmmmmmmmmmmmms-----:///////////////:--:M'),nl,
+    write('    N/----+os/:/-/++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++/-:M'),nl,
+    write('    N/----:o+oso++::----------------------------------------------------------------------------------:M'),nl,
+    write('    N/------/o+os/s+:o::s/-o++/+/o++/o-+o-o-o+-----------:ooo:o:s++:o++o:s/++oo-/s-/s:/oo/+:o:+/-oo---:M'),nl,
+    write('    N/----------o:o:+s-y+y:++++o/++++/oooo/oos+----------/ss:oy:y//:s--s:h+y/s++os:y+y:++-o/yoo:+soo--:M'),nl,
+    write('    N/--------------/::/-:+/++//:/++/-+:-+:+--+----------://:-o:+---/++/:+-:+/:+://:-//:/-/:+-:++--+:-:M'),nl,
+    write('    N/------------------------------------------------------------------------------------------------:M'),nl,
+    write('    N/-h+d/y:hs+/yy/h/sy/y:+s/ys/-:oh+syo/y+s/oh:y/yos+y:-:yos+oooo/y--ysy+-sh:/d/y-d+y/y:+osh:y/y+o:-:M'),nl,
+    write('    N/-d+ssd:ssh-so-d-+y-yoso-s+---:h-syo/yoy+s+yh/y+y+h++/h+sososm/y--ysys+yoh/ysm-d+y+y+sos+yh+yod+-:M'),nl,
+    write('    N/-:::-:-:::-::-:-::--::--::---::-::::::-:::::-:::-:::::::--:::::--:::-::-:::-:-:::--::-::::-:::--:M'),nl,
+    write('    NysssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssM'),nl.
+
                                                           

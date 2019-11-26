@@ -1,0 +1,17 @@
+inventory(signalmon,normal,signum,3945,6716,nosignal,722,airplanemode,985,2,1245,2200.0).
+inventory(radarmon,normal,signum,7467,9440,laprak,1011,radiasi,1215,3,2546,4840.0).
+inventory(kodingmon,normal,hmif,9563,10165,sublime,1034,vscode,1315,3,4742,4840.0).
+inventory(catamon,normal,hmif,11366,11366,cakarAja,1029,cakarBanget,1198,3,6498,4840.0).
+inventory(doraemon,legendary,leaves,4750,9500,baling_bambu,3000,time_machine,5000,1,0,10000).
+inventory(kumon,legendary,fire,4908,12345,english,1234,math,2345,1,1508,10000).
+pos(7,11).
+lebarpeta(12).
+tinggipeta(17).
+isGym(6,10).
+musuh(6,birdmon,normal,leaves,4094,4094,cuitcuit,676,ciutciut,895,1,0,1000).
+musuh(11,nyetrumon,normal,hme,4928,4928,kapasitor,543,induktor,749,1,0,1000).
+musuh(15,garamon,legendary,water,21020,21020,salt,1200,saltbae,2000,1,0,10000).
+alreadyHeal(sudah).
+gameStarted(1).
+spEnemyAvailable(1).
+maxTokemon(6).
